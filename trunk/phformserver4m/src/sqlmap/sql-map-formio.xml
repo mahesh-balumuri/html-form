@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="getForm">
+		select t from Form t where 1=1
+		<dynamic>
+			<isNotEmpty property="formId">
+				and t.formId = :formId
+			</isNotEmpty>
+			<isNotEmpty property="formName">
+				and t.formName like :formName
+			</isNotEmpty>
+		</dynamic>
+		order by t.formName
+	</select>
+	<select id="getFormInstance">
+		select t from FormInstance t where 1=1
+		<dynamic>
+			<isNotEmpty property="formId">
+				and t.formId = :formId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getCheckBox">
+		select t from FormCheckbox t where 1=1
+		<dynamic>
+			<isNotEmpty property="instanceId">
+				and t.instanceId = :instanceId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getText">
+		select t from FormText t where 1=1
+		<dynamic>
+			<isNotEmpty property="instanceId">
+				and t.instanceId = :instanceId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getTextArea">
+		select t from FormTextArea t where 1=1
+		<dynamic>
+			<isNotEmpty property="instanceId">
+				and t.instanceId = :instanceId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getLatestInstanceCheckBox">
+		select t from FormCheckbox t,FormInstance t2 where t.instanceId = t2.id and t.version = t2.version
+		<dynamic>
+			<isNotEmpty property="instanceId">
+				and t.instanceId = :instanceId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getLatestInstanceText">
+		select t from FormText t,FormInstance t2 where t.instanceId = t2.id and t.version = t2.version
+		<dynamic>
+			<isNotEmpty property="instanceId">
+				and t.instanceId = :instanceId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getLatestInstanceTextArea">
+		select t from FormTextArea t,FormInstance t2 where t.instanceId = t2.id and t.version = t2.version
+		<dynamic>
+			<isNotEmpty property="instanceId">
+				and t.instanceId = :instanceId
+			</isNotEmpty>
+			<isNotEmpty property="version">
+				and t.version = :version
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+	<select id="getFormRole">
+		select t from FormRole t where 1=1
+		<dynamic>
+			<isNotEmpty property="roleName">
+				and t.roleName like :roleName
+			</isNotEmpty>
+		</dynamic>
+		order by t.roleName
+	</select>
+	<select id="getFormRoleRelation">
+		select t from FormRoleRelation t where 1=1
+		<dynamic>
+			<isNotEmpty property="formId">
+				and t.formId = :formId
+			</isNotEmpty>
+			<isNotEmpty property="roleId">
+				and t.roleId = :roleId
+			</isNotEmpty>
+		</dynamic>
+		order by t.id
+	</select>
+</sqlMap>

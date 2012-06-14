@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="formIODao" class="com.phform.server.dao.FormIODao" autowire="byName" />
+	<bean id="formIOService" parent="baseService">
+		<property name="target">
+			<bean class="com.phform.server.service.FormIOService" autowire="byName" />
+		</property>
+	</bean>
+	<bean id="formIOAction" class="com.phform.server.web.action.FormIOAction" singleton="false" autowire="byName" />
+</beans>

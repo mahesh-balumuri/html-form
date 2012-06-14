@@ -1,0 +1,1589 @@
+@charset "utf-8";
+
+@import url("header&footer.css");
+
+html {
+	
+}
+
+body {
+	background: #fcfcfe url(image/bg.jpg) repeat-x left top;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Lucida Grande", Verdana, Tahoma, Lucida, Arial, Helvetica,
+		����, sans-serif;
+	font-size: 12px;
+}
+
+p {
+	text-indent: 2em;
+	text-align: justify;
+	text-justify: inter-ideograph;
+	line-height: 180%;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layoulistTablet: fixed;
+}
+
+table tr.even td {
+	background: #fafbfd;
+}
+
+a {
+	text-decoration: none;
+	star: expression(this . onFocus = this . blur() );
+	color: #000;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.ul {
+	display: inline;
+}
+
+.li {
+	float: left;
+	list-style: none;
+}
+
+.Webdings {
+	font-family: Webdings;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+	visibility: hidden;
+}
+
+#preloadedImages {
+	display: inline;
+	background-image: url(url);
+	background-image: url(url);
+}
+
+#pngTransparent {
+	background: url(alphaPng.png) no-repeat;
+	/* for IE6 sizingMethod=crop,scale,image */
+	_background: none;
+	_filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(enabled = true, sizingMethod = image, src =
+		'../../../../../../../../../../alphaPng.png');
+}
+
+select {
+	vertical-align: middle;
+	margin: 0 0 0 1px;
+	height: 25px;
+	line-height: 25px;
+	border: #bcc9c9 1px solid;
+	background: #ffffff;
+	color: #000;
+}
+
+option {
+	line-height: 25px;
+	color: #000;
+}
+
+textarea {
+	vertical-align: middle;
+	margin: 0 1px;
+	padding: 3px 2px 0 2px;
+	line-height: 20px;
+	border: #bcc9c9 1px solid;
+	background: #ffffff;
+	color: #000;
+}
+
+input {
+	vertical-align: middle;
+	margin: 0 1px;
+	height: 18px;
+	padding: 3px 2px 0 2px;
+	line-height: 14px;
+	border: #bcc9c9 1px solid background : #ffffff;
+	color: #000;
+}
+
+.ipt1 {
+	float: left;
+	width: 251px;
+}
+
+.ipt2 {
+	float: left;
+	width: 118px;
+}
+
+.btn { /*float:left;*/
+	vertical-align: middle;
+	display: inline;
+	margin: 5 15px 5px 0;
+	height: 20px;
+	padding: 0px 10px; *
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 18px;
+	border: #d3dce0 1px solid;
+	background: #ffffff url(image/btn_bg.gif) top repeat-x;
+	color: #3b3464;
+}
+
+
+
+.btn1 { /*float:center;*/
+	display: inline;
+	margin: 0 15px 10px 0;
+	height: 21px;
+	padding: 0 10px; *
+	padding: 0 5px;
+	border: #b1b8d6 1px solid;
+	background: #77DFFF url(image/btn_bg.gif) bottom repeat-x;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.btn2 { /*float:left;*/
+	vertical-align: middle;
+	display: inline;
+	margin: 0 15px 10px 0;
+	height: 20px;
+	padding: 0px 10px; *
+	padding-left: 10px;
+	padding-right: 10px;
+	border: #b1b8d6 1px solid;
+	background: #ffffff url(image/btn_bg.gif) top repeat-x;
+	color: #3b3464;
+}
+
+.slt {
+	
+}
+
+.id {
+	
+}
+
+.pass {
+	
+}
+
+.submit {
+	
+}
+
+dd input {
+	vertical-align: text-bottom;
+	margin: 0 5px;
+	height: auto;
+	padding: 0;
+	line-height: normal;
+	border: none;
+	background: none;
+}
+
+.hidden {
+	opacity: 0;
+	position: absolute;
+}
+
+.visible {
+	opacity: 1;
+}
+
+.calendar * {
+	font-size: 12px;
+}
+
+input.calendar,select.calendar {
+	float: left;
+	width: 80px;
+	font-size: 12px;
+}
+
+button.calendar {
+	float: left;
+	background: url(calendar/calendar-icon.gif);
+	border: 0;
+	cursor: pointer;
+	height: 20px;
+	margin: 2px 2px 0 1px;
+	width: 20px;
+}
+
+button.calendar:hover,button.calendar:active {
+	background-position: 0 0px;
+}
+
+div.calendar {
+	background: url(calendar/calendar.png) no-repeat;
+	height: 205px;
+	padding: 0 6px;
+	text-align: center;
+	width: 147px
+}
+
+div.calendar div {
+	background: none !important;
+	cursor: move;
+	height: 195px;
+	overflow: hidden;
+	padding-top: 10px;
+	position: relative;
+	width: 147px;
+}
+
+div.calendar div .closes {
+	position: absolute;
+	right: -3px;
+	top: 10px;
+	z-index: 999;
+	background: url(calendar/close.gif);
+	width: 16px;
+	height: 16px;
+	border: 0;
+}
+
+div.calendar caption {
+	color: #333;
+	font: normal 12px/ 16px Arial, Helvetica, sans-serif;
+	padding-top: 16px;
+	text-align: center;
+	width: 100%;
+}
+
+div.calendar caption a {
+	cursor: pointer;
+	display: block;
+	height: 12px;
+	overflow: hidden;
+	position: absolute;
+	text-indent: -20px;
+	top: 0;
+	width: 11px;
+}
+
+div.calendar caption a.prev {
+	background-image: url(calendar/calendar-prev.gif);
+	left: -5px;
+	_left: -5px;
+}
+
+div.calendar caption a.next {
+	background-image: url(calendar/calendar-next.gif);
+	right: -5px;
+	_right: 80px;
+}
+
+div.calendar caption a:hover {
+	background-position: 0 12px;
+}
+
+div.calendar caption span {
+	height: 25px;
+	position: relative;
+	text-align: center;
+	margin: 0 5px;
+	padding: 0 3px 0 3px;
+	_margin: 0 5px;
+	_padding: 0;
+}
+
+div.calendar caption span.month {
+	padding-right: 8px;
+}
+
+div.calendar caption span.month:after {
+	content: ',';
+}
+
+div.calendar table {
+	background: #f9f9fb;
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	cursor: default;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 147px;
+}
+
+div.calendar td,div.calendar th {
+	border: 0;
+	color: #b8bbc8;
+	font: normal 12px Arial, Helvetica, sans-serif;
+	height: 21px;
+	text-align: center;
+	width: 21px;
+	overflow: hidden;
+}
+
+div.calendar td {
+	background: url(calendar/calendar-td.gif);
+	color: #b8bbc8;
+	font-size: 11px;
+}
+
+div.calendar td.invalid {
+	color: #93673c;
+}
+
+div.calendar td.valid {
+	background: url(calendar/calendar-valid.gif);
+	color: #93673c;
+	cursor: pointer;
+}
+
+div.calendar td.hilite {
+	background: url(calendar/calendar-hilite.gif);
+}
+
+div.calendar td.inactive {
+	background: url(calendar/calendar-td.gif) 0 100%;
+	color: #93673c;
+}
+
+div.calendar td.active,div.calendar td.hover {
+	background: url(calendar/calendar-valid.gif) 0 100%;
+	color: #fff;
+	cursor: pointer;
+}
+
+a.red {
+	color: #FF0000;
+}
+
+.header {
+	height: 85px;
+	border-bottom: #bac1ca 1px solid;
+	background: url(image/header_bg.jpg) repeat-x;
+}
+
+.header .logo {
+	margin:0;
+	position: absolute;
+	z-index: 3;
+}
+
+.header .logo a {
+	float: left;
+	margin: 0px 0 0 0px;
+}
+
+.header .logo img {
+	border: 0;
+}
+
+.header .tools {
+	position: absolute;
+	top: 30px;
+	left: 400px;
+	height: 20px;
+	text-align: right;
+	font-size: 12px;
+	color: #FFF;
+	line-height: 20px;
+}
+
+.header .time {
+	margin-top: 50px;
+	position: absolute;
+	height: 20px;
+	width: 100%;
+	text-align: right;
+	font-size: 12px;
+	color: #fff;
+	line-height: 20px;
+}
+
+.header .time a {
+	margin: 0 10px;
+	font-size: 12px;
+	color: #fff;
+	line-height: 16px;
+}
+
+.header .cloud {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 100px;
+}
+
+.header .sun {
+	position: absolute;
+	z-index: 2;
+	top: -80px;
+	left: 400px;
+}
+
+.menu {
+	background: #f9fdff;
+	height: 100%;
+}
+
+.menu * {
+
+	cursor: pointer;
+}
+
+.menu div {
+
+	overflow: hidden;
+}
+
+.menu div.collapsed {
+
+	height: 25px;
+}
+
+.menu span {
+	display: block;
+	height: 23px;
+	padding-left: 32px;
+	background: url(image/menu5.gif) top left repeat-x;
+	line-height: 25px;
+	text-align: left;
+	font-size: 12px;
+	color: #000000;
+	font-weight: bold;
+	font-family:"宋体"
+}
+
+.menu span img {
+	vertical-align: middle;
+	border: 0;
+}
+
+.menu span span {
+	border: 0;
+}
+
+.menu a {
+	display: block;
+	line-height: 25px;
+	padding-left: 40px;
+	text-align: left;
+	font-size: 12px;
+	color: #383838;
+	text-decoration: none;
+}
+
+.menu a * {
+	font-size: 12px;
+}
+
+.menu a.current {
+	background: #f7f6c8 url(image/menu_arrow.gif) 20px 7px no-repeat;
+	font-weight: bold;
+}
+
+.menu a:hover {
+	background: #f7f6c8 url(image/menu_onfocus.gif) repeat-x;
+	font-weight: bold;
+}
+
+.menu .close {
+	position: absolute;
+	margin: 5px 0 0 -20px; *
+	margin: 0 0 0 -20px;
+	width: 13px;
+	height: 15px;
+	background: url(image/ico_close.png) no-repeat; /* for IE6 */
+	_background: none;
+	_filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(enabled = true, sizingMethod = image, src =
+		'../../../../../../../../../../image/ico_close.png');
+}
+
+#main {
+	float: left;
+	width: 844px;
+	margin: 0 0 20px 0;
+}
+
+#main #bg {
+	float: left;
+}
+
+#main #l {
+	float: left;
+}
+
+#main #r {
+	float: right;
+}
+
+.title {
+	padding-left: 15px;
+	height: 30px;
+	line-height: 30px;
+	background: #ffffff;
+	color: #575757;
+	display: none;
+}
+
+.title span {
+	font-weight: bold;
+	color: #000000;
+}
+
+.captiontwo {
+	height: 22px;
+	margin: 0px;
+	border: none;
+	background: url(image/caption_bg2.gif) repeat-x;
+	line-height: 25px;
+	color: #000000;
+	text-indent: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align:24px;
+}
+.captiontwo img{padding-right:8px}
+.captionthr {
+	height: 22px;
+	margin: 0px;
+	border: none;
+	background: url(image/caption_bg3.gif) repeat-x;
+	line-height: 22px;
+	color: #000000;
+	text-indent: 12px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.caption {
+	width: 100%;
+	padding-right: 0px;
+	height: 22px;
+	margin-bottom: 4px;
+	border: none;
+	background: url(image/caption_bg.gif) repeat-x;
+	line-height: 22px;
+	color: #000;
+	text-indent: 12px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.caption h1 {
+	font-size: 13px;
+}
+
+.captionw {
+	width: 760px;
+	height: 27px;
+	margin: 0 15px 15px 0px;
+	border-top: #cad7ee 2px solid;
+	background: #D8F0FC;
+	line-height: 27px;
+	color: #000000;
+	text-indent: 2em;
+}
+
+.box {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	color: #000000;
+	overflow: hidden
+}
+
+.box .caption {
+	margin: 0 0 0 0;
+	text-align: center;
+	text-indent: 0;
+}
+
+.search {
+	width: 100%;
+	background: #f6f9fa;
+	border-bottom: 1px solid #d1d9df;
+	padding-top: 10px
+}
+
+.search form {
+	
+}
+
+.search label {
+	float: left;
+	width: 125px;
+	text-align: right;
+	line-height: 25px;
+	_padding-top: 5px;
+}
+
+.search .fix {
+	
+}
+
+.ico1 {
+	float: left;
+	margin: 9px 0 0 5px;
+	background: url(image/ico1.gif);
+	width: 4px;
+	height: 8px;
+	overflow: hidden;
+}
+
+.ico2 {
+	display: none;
+	float: left;
+	margin: 9px 0 0 -12px;
+	background: url(image/ico2.gif);
+	width: 4px;
+	height: 8px;
+	overflow: hidden;
+}
+
+.ico3 {
+	display: none;
+	float: left;
+	margin: 9px 0 0 5px;
+	background: url(image/ico1.gif);
+	width: 4px;
+	height: 8px;
+	overflow: hidden;
+}
+
+.search table {
+	table-layout: fixed;
+}
+
+.search table td {
+	overflow: hidden;
+	line-height: 30px;
+	color: #000;
+}
+
+.search table td span {
+	float: left;
+	line-height: 30px;
+}
+
+.search table .field {
+	background: url(image/ico1.gif) right center no-repeat;
+	padding-right: 10px;
+	text-align: center;
+	line-height: 30px;
+	font-weight: bold;
+	color: #000;
+}
+
+button.more {
+	vertical-align: middle;
+	background: url(image/btn_more.gif);
+	border: 0;
+	cursor: pointer;
+	height: 20px;
+	margin: 2px 2px 0 1px;
+	width: 20px;
+	overflow: hidden;
+}
+
+button.more:hover {
+	background-position: 0 20px;
+}
+
+button.pull {
+	vertical-align: middle;
+	background: url(image/btn_pull.gif);
+	border: 0;
+	cursor: pointer;
+	height: 20px;
+	margin: 2px 2px 0 1px;
+	width: 20px;
+	overflow: hidden;
+}
+
+button.pull:hover {
+	background-position: 0 20px;
+}
+
+.box .button {
+	text-align: center;
+	padding: 15px 0;
+}
+
+.box .button .btn {
+	float: none;
+	margin: 0 10px;
+}
+
+.box .button .ico2 {
+	position: absolute;
+	float: none;
+}
+
+.printStyle table {
+	background: #FFF;
+}
+
+.printStyle table th {
+	background: #FFF;
+	border: #000 1px solid;
+	color: #000;
+}
+
+.printStyle table td {
+	background: #FFF;
+	border: #000 1px solid;
+	color: #000;
+}
+
+.list {
+	
+}
+
+.list table {
+	border-collapse:collapse;
+	border: 1px solid #d0d0d0;
+	background: #FFF;
+	margin: 2px 0 10px 0;
+}
+
+.list table th {
+	border: 1px solid #d0d0d0;
+	background: url(image/tablethbg.gif) repeat-x;
+	line-height: 19px;
+	color: #000;
+	height:20px;
+}
+
+.list table td {
+	background: #FFF;
+	border: #d0d0d0 1px solid;
+	line-height: 24px;
+	color: #000;
+	text-align: center;
+}
+
+.list table a {
+	color: #000;
+	text-decoration: underline;
+}
+
+.list table a:hover {
+	text-decoration: none;
+}
+
+.list table th a {
+	text-decoration: none;
+}
+
+.list table th a:hover {
+	text-decoration: underline;
+}
+
+.list table tr.green td {
+	border: #67E600 1px solid;
+	background: #DEFCC6;
+}
+
+.list table tr.red td {
+	border: #E61B00 1px solid;
+	background: #FDCDC5;
+}
+
+.list table tr.yellow td {
+	border: #E6D800 1px solid;
+	background: #FDFAC5;
+}
+
+.list table tr.blue td {
+	border-collapse:collapse;
+	border: 1px solid #bada9a;
+	background: #f1fbda;
+}
+
+.list table tr.odd td {
+	background: #FFF;
+}
+
+.list table tr.even td {
+	background: #f6f7fb;
+}
+
+.list table .button {
+	border: 0;
+}
+
+.list .oper {
+	height: auto;
+	_height: 60px;
+}
+
+.list .pages {
+	float: right;
+	display: inline;
+	width: 60%;
+	margin: 15px 0 0 0;
+	border: 0;
+	color: #000;
+	font-weight: bold;
+}
+
+.list .pages a {
+	line-height: 25px;
+	padding: 3px;
+	border: #FFF 1px solid;
+	background: #FFF;
+	color: #000;
+	font-weight: bold;
+}
+
+.list .pages a:hover {
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.list .pages {
+	background: none;
+}
+
+.list .pages td {
+	background: none;
+	border: 0;
+	color: #000;
+	font-weight: bold;
+	text-align: right;
+}
+
+.list .export {
+	float: left;
+	display: inline;
+	width: 29%;
+	margin: 15px 0 0 0;
+}
+
+.list .sort {
+	margin: 0 0 0 5px;
+	padding: 0 2px 2px 2px;
+	_padding: 3px 0 0 0;
+	_letter-spacing: -1px; /* font-family:Webdings;*/
+	background: #F8E4C6;
+	color: #DB860C;
+	border: #DB860C 1px solid;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.list .sort:hover {
+	color: #FFF;
+	background: #DB860C;
+	border: #F8E4C6 1px solid;
+}
+
+.list table th a.sortNormal {
+	padding: 0 15px 0 0;
+}
+
+.list table th a.sortAsc {
+	padding: 0 15px 0 0;
+	background: url(image/ico_asc.gif) right center no-repeat;
+}
+
+.list table th a.sortDesc {
+	padding: 0 15px 0 0;
+	background: url(image/ico_desc.gif) right center no-repeat;
+}
+
+.myTask {
+	padding: 0px;
+	width: 645px;
+}
+
+.myTask .caption {
+	margin: 0;
+	font-weight: bold;
+}
+
+.myTask .caption h1 {
+	float: left;
+	text-indent: 1em;
+}
+
+.myTask .more {
+	
+}
+
+
+.myTask .more img {
+	float: right;
+	display: block;
+	margin-top:-25px;
+	_margin-top:-18px;
+	margin-right:4px;
+	height: 22px;
+	width: 36px;
+	border: 0;
+}
+
+
+.notice .more img {
+	float: right;
+  margin-top:-25px;
+	_margin-top:-25px;
+	margin-right:12px;
+	height: 22px;
+	width: 36px;
+	border: 0;
+}
+
+
+.myTask table {
+	border:1px solid #d0d0d0;
+	background: #FFF;
+	margin: 2px 0 10px 0;
+}
+
+.myTask table th {
+	background: url(image/tablethbg.gif) repeat-x;
+	border-top: none;
+	border-left: 1px solid #d0d0d0;
+	border-right: 1px solid #d0d0d0;
+	border-bottom: 1px solid #d0d0d0;
+	line-height: 19px;
+	color: #000;
+	height:20px;
+}
+
+.myTask table td {
+	background: #fafbfd;
+	border-top: 1px solid #d0d0d0;
+	border-left: 1px solid #ffffff;
+	border-right: 1px solid #d0d0d0;
+	border-bottom: 1px solid #d0d0d0;
+	line-height: 25px;
+	color: #000;
+	text-align: center;
+}
+
+.myTask table a {
+	color: #000;
+	text-decoration: underline;
+}
+
+.myTask table a:hover {
+	text-decoration: none;
+}
+
+.fstzbg {
+	background: url(image/fstzbg.jpg) repeat-x;
+}
+
+.notice {
+	padding: 0px;
+	width: 220px;
+}
+
+.notice .caption {
+	margin: 0;
+	font-weight: bold;
+}
+
+.notice .caption h1 {
+	text-indent: 1em;
+	float: left;
+}
+
+.notice .more {
+	
+}
+
+.notice table {
+	background: #FFF;
+	margin: 2px 0 40px 0;
+	padding-bottom: 50px
+}
+
+.notice table th {
+	background: #eff2f7 top repeat-x;
+	border-top: 1px solid #cad7ee;
+	border-left: 1px solid #cad7ee;
+	border-right: 1px solid #cad7ee;
+	border-bottom: 1px solid #cad7ee;
+	line-height: 25px;
+	line-height: 25px;
+	color: #000;
+	font-size: 12px;
+}
+
+.notice table td {
+	height: 24px;
+	background: #fafbfd;
+	border-top: 1px solid #cad7ee;
+	border-left: 1px solid #cad7ee;
+	border-right: 1px solid #cad7ee;
+	border-bottom: 1px solid #cad7ee;
+	line-height: 25px;
+	color: #000;
+	text-align: center;
+	font-size: 12px;
+}
+
+.tab {
+	margin: 50px 0 0 10px;
+	padding: 10px;
+	border: #6d7780 1px solid;
+	background: #ffffff;
+}
+
+.tab .tabMenu {
+	float: left;
+	position: absolute;
+	margin: -40px 0 0 0;
+}
+
+.tab .tabMenu ul {
+	list-style: none;
+	height: 30px;
+}
+
+.tab .tabMenu li {
+	display: inline;
+}
+
+.tab .tabMenu a {
+	float: left;
+	margin: 4px 0 0 3px;
+	padding-left: 8px;
+	text-decoration: none;
+	background: url(image/tabMenu_bg.gif) left top;
+}
+
+.tab .tabMenu a span {
+	display: block;
+	padding: 3px 10px 0 2px;
+	line-height: 22px;
+	background: url(image/tabMenu_bg.gif) right top;
+	color: #000000;
+}
+
+
+
+.tab .tabMenu a.tabactive {
+	margin: 0 0 0 3px;
+	background-position: left -26px;
+	font-weight: bold;
+}
+
+.tab .tabMenu a.tabactive span {
+	line-height: 27px;
+	background-position: right -26px;
+	color: #000000;
+}
+
+.tab .tabMenu2 {
+	float: left;
+}
+
+.insert {
+	width: 350px;
+	height: 500px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	border: #cad7ee 1px solid;
+	background: #FFF;
+}
+
+.insertButton {
+	float: left;
+	width: 106px;
+	height: 500px;
+	text-align: center;
+}
+
+.insertButton .btn {
+	margin: 0 0 10px 0;
+}
+
+.insertButton .fix {
+	margin: 0 0 10px 0;
+}
+
+.insertButton .ico2 {
+	margin: 9px 0 0 1px;
+}
+
+.insertButton .ico3 {
+	margin: 9px 1px 0 20px;
+	_margin: 9px 1px 0 10px;
+	background: url(image/ico3.gif);
+}
+
+.requisition {
+	width: 300px;
+	overflow-x: hidden;
+	border: #cad7ee 1px solid;
+	padding: 2px;
+	background: #FFF;
+}
+
+.requisition .caption {
+	margin: 0;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 0;
+}
+
+.requisition .detail {
+	padding: 10px;
+	text-align: center;
+}
+
+.requisition td {
+	line-height: 30px;
+	text-align: left;
+}
+
+.requisition textarea {
+	height: 100px;
+	width: 260px;
+}
+
+.requisition .field {
+	background: none;
+	padding-right: 10px;
+	text-align: right;
+}
+
+.requisition .overtime {
+	font-weight: bold;
+	color: #C06517;
+}
+
+.requisition .overdue {
+	font-weight: bold;
+	color: #C01717;
+}
+
+.requisition .bg {
+	position: absolute;
+	margin: 3px 0 0 0; *
+	margin: 3px 0 0 -159px;
+	height: 13px;
+	width: 318px;
+	background: url(image/requisition_bg.png) no-repeat; /* for IE6 */
+	_background: none;
+	_filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(enabled = true, sizingMethod = image, src =
+		'../../../../../../../../../../image/requisition_bg.png');
+}
+
+.succeed {
+	width: 300px;
+	overflow-x: hidden;
+	border-left: #8495ac 1px solid;
+	border-right: #8495ac 1px solid;
+	border-bottom: #8495ac 1px solid;
+	padding: 0px;
+}
+
+.succeed .caption {
+	margin: 0;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 0;
+}
+
+.succeed .detail {
+	padding: 10px;
+	text-align: center;
+}
+
+.succeed td {
+	line-height: 30px;
+	text-align: left;
+}
+
+.succeed .bg {
+	position: absolute;
+	margin: 3px 0 0 0; *
+	margin: 3px 0 0 -159px;
+	height: 13px;
+	width: 318px;
+	background: url(image/requisition_bg.png) no-repeat; /* for IE6 */
+	_background: none;
+	_filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(enabled = true, sizingMethod = image, src =
+		'../../../../../../../../../../image/requisition_bg.png');
+}
+
+.helpInfo {
+	padding: 10px;
+	background: #fafbfb url(image/ico_helpInfo.gif) 2px 2px no-repeat;
+	border: #c4d1ce 1px solid;
+	text-align: left;
+	color: #b6c6c2;
+	font-size: 12px;
+	line-height: 150%;
+}
+
+.helpInfoActive {
+	padding: 10px;
+	background: #AEEEA1 url(image/ico_helpInfoActive.gif) 2px 2px no-repeat;
+	border: #00AD1C 1px solid;
+	text-align: left;
+	color: #077018;
+	font-size: 12px;
+	line-height: 150%;
+}
+
+.helpInfo h3,.helpInfoActive h3 {
+	font-size: 12px;
+}
+
+.form {
+	
+}
+
+.form .field {
+	background: url(image/ico1.gif) right center no-repeat;
+	padding-right: 10px;
+	text-align: right;
+	line-height: 30px;
+}
+
+.form span {
+	float: left;
+	line-height: 30px;
+}
+
+.detailInfo {
+	overflow-x: hidden;
+}
+
+.detailInfo .caption {
+	margin: 0;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 0;
+}
+
+.detailInfo .detail {
+	padding: 10px;
+	text-align: center;
+}
+
+.detailInfo table {
+	margin: 4px;
+	border-collapse: collapse;
+	border: 1px solid #cad7ee;
+	background: #f6f8fc;
+}
+
+.detailInfo td {
+	padding: 0 5px;
+	border: 1px solid #cad7ee;
+	line-height: 30px;
+	text-align: left;
+	background: #fafbfd;
+}
+
+.detailInfo textarea {
+	
+}
+
+.detailInfo .field {
+	background: #eff2f7;
+	padding-right: 10px;
+	text-align: right;
+	font-weight: bold;
+	color: #13346b;
+}
+
+.tree {
+	margin: 10px;
+	border: #cad7ee 1px solid;
+	background: #f2f8fa;
+	color: #000000;
+	overflow: hidden;
+}
+
+.tree .column {
+	background: #ffffff;
+}
+
+.tree .column .treeColumn {
+	border: #cad7ee 1px solid;
+	background: #FAFAFA;
+	width: 200px;
+	vertical-align: top;
+	text-align: left;
+}
+
+.tree .column .treeColumn a {
+	display: block;
+	font-size: 12px;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+.tree .column .treeColumn a:hover {
+	color: #FFFFFF;
+	background: #cad7ee;
+}
+
+.tree .column .treeColumn a img {
+	margin: 0 5px;
+	_margin: 3px 5px;
+	border: 0;
+	vertical-align: middle;
+}
+
+.tree .column .treeColumn .tree2 {
+	margin-left: 15px;
+}
+
+.tree .column .treeColumn .tree3 {
+	margin-left: 30px;
+}
+
+.tree .column .treeContent {
+	border: #cad7ee 1px solid;
+	background: #FAFAFA;
+	padding: 10px;
+}
+
+.tree .column .treeContent .caption {
+	margin: 0;
+	font-weight: bold;
+}
+
+.tree .column .treeContent .tableList {
+	margin: 5px 0 20px 0;
+}
+
+.tree .column .treeContent .tableList th {
+	background: #DFEDF6 url(image/th_bg.gif) top repeat-x;
+	border: #cad7ee 1px solid;
+	line-height: 25px;
+	color: #000;
+}
+
+.tree .column .treeContent .tableList td {
+	padding: 0 5px;
+	border: #cad7ee 1px solid;
+	background: #FAFAFA;
+	line-height: 22px;
+}
+
+.tree .column .treeContent .tableForm {
+	margin: 5px 0 20px 0;
+	line-height: 25px;
+}
+
+.tree .column .treeContent .tableForm th {
+	padding: 0 5px;
+	background: #add1e8;
+	color: #000;
+	text-align: right;
+}
+
+.tree .column .treeContent .tableForm td {
+	padding: 0 5px;
+	background: #fafbfd;
+	line-height: 25px;
+}
+
+.box .caption_old {
+	margin: 0 0 5px 0;
+	background: #ADD1E8;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 0;
+	
+}
+
+.solveInfo {
+	overflow-x: hidden;
+	padding: 10px;
+	background: #fcfcfe;
+}
+
+.solveInfo .detail {
+	padding: 10px;
+	text-align: center;
+}
+
+.solveInfo table {
+	background: #cad7ee;
+}
+
+.solveInfo td {
+	padding: 0 5px;
+	line-height: 30px;
+	text-align: left;
+	background: #fafbfd;
+}
+
+.solveInfo .field {
+	background: #eff2f7;
+	padding-right: 10px;
+	text-align: left;
+	font-weight: bold;
+	color: #000000;
+}
+
+.promptInfo {
+	padding: 20px 10px 20px 50px;
+	background: #eff2f7 url(image/ico_promptInfo.gif) 2px 2px no-repeat;
+	border: #cad7ee 1px solid;
+	text-align: left;
+	color: #13346b;
+	font-size: 12px;
+	line-height: 150%;
+}
+
+.promptInfo p {
+	font-size: 12px;
+	text-indent: 0;
+}
+
+.promptInfo span {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.promptInfo .ico {
+	position: absolute;
+	margin: -10px 0 0 -45px;
+	height: 40px;
+	width: 40px;
+}
+
+.application {
+	padding: 0px;
+}
+
+.application .caption {
+	margin: 0;
+	font-weight: bold;
+}
+
+.application .caption h1 {
+	float: left;
+	text-indent: 1em;
+}
+
+.application .more {
+	
+}
+
+.application .more img {
+	float: right;
+	display: block;
+	margin: 10px 10px 0 0;
+	_margin: 10px 5px 0 0;
+	height: 22px;
+	width: 36px;
+	border: 0;
+}
+
+.application table {
+	border: 1px solid #cad7ee;
+	border-collapse: collapse;
+	background: #FFF;
+	margin: 2px 0 10px 0;
+}
+
+.application table th {
+	background: #eff2f7 url(image/th_bg.gif) top repeat-x;
+	border: #cad7ee 1px solid;
+	line-height: 25px;
+	color: #000;
+}
+
+.application table td {
+	background: #FFF;
+	border: #cad7ee 1px solid;
+	line-height: 25px;
+	color: #000;
+	text-align: left;
+}
+
+.application input {
+	background: none;
+	border: 0;
+	border:#cad7ee 1px solid;
+	width: 70%;
+	height:15px
+}
+
+.application textarea {
+	padding: 4pxbackground : #fffff7;
+	border: #b7c0cf 1px solid;
+	width: 70%;
+	overflow-x: auto;
+}
+
+.application .fix {
+	border-bottom: 0;
+	width: auto;
+}
+
+#footer {
+	clear: both;
+	padding: 10px 10px 10px 0;
+	border: #999 solid;
+	border-width: 1px 0;
+	background: #5094C8 url(image/footer_bg.jpg) left top repeat-x;
+	text-align: right;
+	font-size: 12px;
+	color: #000000;
+}
+
+#copyright {
+	
+}
+
+.xmList table {
+	background: #FFF;
+	margin: 2px 0 40px 0;
+	padding-bottom: 50px
+}
+
+.xmList table th {
+	background: #eff2f7 top repeat-x;
+	border-top: 1px solid #cad7ee;
+	border-left: 1px solid #cad7ee;
+	border-right: 1px solid #cad7ee;
+	border-bottom: 1px solid #cad7ee;
+	line-height: 25px;
+	line-height: 25px;
+	color: #000;
+	font-size: 12px;
+}
+
+.xmList table td {
+	height: 24px;
+	background: #fafbfd;
+	border-top: 1px solid #cad7ee;
+	border-left: 1px solid #cad7ee;
+	border-right: 1px solid #cad7ee;
+	border-bottom: 1px solid #cad7ee;
+	line-height: 25px;
+	color: #000;
+	text-align: center;
+	font-size: 12px;
+}
