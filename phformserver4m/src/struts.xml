@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.saveDir" value="" />
+	<constant name="struts.multipart.maxSize" value="10485760" />
+
+	<include file="struts_common.xml" />
+	<include file="struts_formio.xml" />
+	<include file="struts_formpro.xml" />
+    
+</struts>

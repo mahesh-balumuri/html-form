@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="formProAction" class="com.phform.server.web.action.FormProAction" singleton="false" autowire="byName" />
+	<bean id="roleAction" class="com.phform.server.web.action.RoleAction" singleton="false" autowire="byName" />
+	<bean id="submitAction" class="com.phform.server.web.action.SubmitAction" singleton="false" autowire="byName" />
+</beans>

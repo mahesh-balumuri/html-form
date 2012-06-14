@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="propertyConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:system.properties</value>
+            </list>
+        </property>
+    </bean>
+
+     <!--JNDI DataSource for J2EE environments -->
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="maxActive" value="${dataSource.maxActive}" />
+        <property name="maxIdle" value="${dataSource.maxIdle}" />
+        <property name="minIdle" value="${dataSource.minIdle}" />
+        <property name="maxWait" value="${dataSource.maxWait}" />
+        <property name="defaultAutoCommit" value="${dataSource.defaultAutoCommit}"/>
+        <property name="removeAbandoned" value="${dataSource.removeAbandoned}"/>
+        <property name="removeAbandonedTimeout" value="${dataSource.removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="${dataSource.logAbandoned}"/>
+    </bean>
+	<bean id="baseService" lazy-init="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="exec*">PROPAGATION_REQUIRED</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:GlobalMessage</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="lobHandler"
+		class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+		lazy-init="true">
+	</bean>
+
+	<!-- SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+		abstract="false" singleton="true" lazy-init="default"
+		autowire="default" dependency-check="default" >
+		<property name="dataSource" >
+            <ref bean="dataSource"/>
+        </property>
+		<property name="lobHandler">
+			<ref local="lobHandler" />
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value></value>
+            </list>  
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					${db.dialect}
+<!--                   org.hibernate.dialect.OracleDialect-->
+<!--					org.hibernate.dialect.MySQLDialect-->
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+<!--                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider-->
+<!--				</prop>-->
+<!--				<prop key="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</prop>-->
+<!--				<prop key="hibernate.cache.use_query_cache">true</prop>-->
+            </props>
+		</property>
+	</bean>
+
+	<!-- TransactionManager  -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:sqlmap/sql-map-config.xml"/>
+    </bean>
+    <bean id="baseDao" class="com.phform.server.framework.base.dao.BaseDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+	<bean id="jdbcTemplateSup" 
+         class="org.springframework.jdbc.core.JdbcTemplate" autowire="byName"> 
+         <property name="dataSource"> 
+             <ref bean="dataSource"/> 
+         </property > 
+    </bean >
+</beans>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>2.2.3</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>ai</short-name>
+	<uri>/phf-tags</uri>
+	<display-name>"phf Tags"</display-name>
+	<description><![CDATA[""]]></description>
+	<tag>
+		<name>muniPub</name>
+		<tag-class>com.phform.server.web.tag.AIMunicipalPubTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[Render a I18n text message]]></description>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>tags name</description>
+		</attribute>
+		<attribute>
+		    <name>act</name>
+		    <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+	        <description>tags name</description>
+		</attribute>
+	</tag>	
+</taglib>

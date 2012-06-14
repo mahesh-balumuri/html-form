@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  	<package name="formio" extends="default" namespace="/formio">
+	    <action name="formOut" class="formIOAction" method="formOut">
+			<result name="success" type="stream">
+				<param name="inputName">formoutStream</param>
+				<param name="contentType">text/html</param>
+<!--
+				<param name="contentDisposition">
+					attachment;filename="${downFileName}"
+				</param>
+-->
+				<param name="bufferSize">4096</param>
+			</result>
+	    </action>
+	    <action name="formPrint" class="formIOAction" method="formPrint">
+			<result name="success" type="stream">
+				<param name="inputName">formoutStream</param>
+				<param name="contentType">text/html</param>
+<!--
+				<param name="contentDisposition">
+					attachment;filename="${downFileName}"
+				</param>
+-->
+				<param name="bufferSize">4096</param>
+			</result>
+	    </action>
+	    <action name="formIn" class="formIOAction" method="formIn">
+	    	<result name="success">/WEB-INF/pages/admin/result.jsp</result>
+	    </action>
+	    <action name="testSubmit" class="submitAction" method="testSubmit">
+	    	<result name="success">/WEB-INF/pages/admin/result.jsp</result>
+	    </action>
+	    <action name="testFormOut" class="submitAction" method="testFormOut">
+			<result name="success" type="stream">
+				<param name="inputName">formoutStream</param>
+				<param name="contentType">text/html</param>
+<!--
+				<param name="contentDisposition">
+					attachment;filename="${downFileName}"
+				</param>
+-->
+				<param name="bufferSize">4096</param>
+			</result>
+	    </action>
+	    <action name="testFormPrint" class="submitAction" method="testFormPrint">
+			<result name="success" type="stream">
+				<param name="inputName">formoutStream</param>
+				<param name="contentType">text/html</param>
+<!--
+				<param name="contentDisposition">
+					attachment;filename="${downFileName}"
+				</param>
+-->
+				<param name="bufferSize">4096</param>
+			</result>
+	    </action>
+	    <action name="formInAjax" class="formIOAction" method="formInAjax">
+	    </action>
+	    <action name="formPrintAjax" class="formIOAction" method="formPrintAjax">
+	    </action>
+  	</package>
+</struts>
