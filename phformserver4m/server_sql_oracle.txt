@@ -1,0 +1,86 @@
+-- Create table
+create table PH_FORM(  ID       VARCHAR2(50) not null,  FORMID   VARCHAR2(100) not null,  FORMNAME VARCHAR2(500) not null,  FORMPATH VARCHAR2(500) not null);
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM  add constraint PK_FORM primary key (ID);
+alter table PH_FORM  add constraint UK_FORM unique (FORMID);
+-- Create table
+create table PH_FORM_INSTANCE(  ID      VARCHAR2(50) not null,  FORMID  VARCHAR2(50) not null,  VERSION NUMBER default 0 not null);
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM_INSTANCE  add constraint PK_FORM_INSTANCE primary key (ID)alter table PH_FORM_INSTANCE  add constraint FK_FORM_INSTANCE foreign key (FORMID)  references PH_FORM (ID);
+-- Create table
+create table PH_FORM_ROLE(  ID       VARCHAR2(50) not null,  ROLENAME VARCHAR2(500) not null);
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM_ROLE  add constraint PK_FORM_ROLE primary key (ID);
+-- Create table
+create table PH_FORM_ROLERELATION(  ID         VARCHAR2(50) not null,  FORMID     VARCHAR2(50) not null,  ROLEID     VARCHAR2(50) not null,  ELEMENTID  VARCHAR2(50) not null,  PERMISSION VARCHAR2(10) not null);
+-- Add comments to the columns 
+comment on column PH_FORM_ROLERELATION.PERMISSION  is '1:read 2:write 3:read|write';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM_ROLERELATION  add constraint PK_FORM_ROLERELATION primary key (ID);
+alter table PH_FORM_ROLERELATION  add constraint FK_FORM_ROLERELATION1 foreign key (FORMID)  references PH_FORM (ID);
+alter table PH_FORM_ROLERELATION  add constraint FK_FORM_ROLERELATION2 foreign key (ROLEID)  references PH_FORM_ROLE (ID);
+-- Create table
+create table PH_FORM_CHECKBOX
+(
+  INSTANCEID    VARCHAR2(50) not null,
+  CHECKBOXID    VARCHAR2(50) not null,
+  CHECKBOXVALUE VARCHAR2(1),
+  VERSION       NUMBER default 0 not null,
+  ID            VARCHAR2(50) not null
+);
+-- Add comments to the columns 
+comment on column PH_FORM_CHECKBOX.CHECKBOXVALUE
+  is '0:false 1:true';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM_CHECKBOX
+  add constraint PK_FORM_CHECKBOX primary key (ID);
+alter table PH_FORM_CHECKBOX
+  add constraint UK_FORM_CHECKBOX unique (INSTANCEID, CHECKBOXID, VERSION);
+alter table PH_FORM_CHECKBOX
+  add constraint FK_FORM_CHECKBOX foreign key (INSTANCEID)
+  references PH_FORM_INSTANCE (ID);
+-- Create table
+create table PH_FORM_TEXT(  INSTANCEID VARCHAR2(50) not null,  TEXTID     VARCHAR2(50) not null,  TEXTVALUE  VARCHAR2(4000),  VERSION    NUMBER default 0 not null,  ID         VARCHAR2(50) not null);
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM_TEXT  add constraint PK_FORM_TEXT primary key (ID);
+alter table PH_FORM_TEXT  add constraint UK_FORM_TEXT unique (INSTANCEID, TEXTID, VERSION);
+alter table PH_FORM_TEXT  add constraint FK_FORM_TEXT foreign key (INSTANCEID)  references PH_FORM_INSTANCE (ID);
+-- Create table
+create table PH_FORM_TEXTAREA(  INSTANCEID    VARCHAR2(50) not null,  TEXTAREAID    VARCHAR2(50) not null,  TEXTAREAVALUE VARCHAR2(4000),  VERSION       NUMBER default 0 not null,  ID            VARCHAR2(50) not null);
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PH_FORM_TEXTAREA  add constraint PK_FORM_TEXTAREA primary key (ID);
+alter table PH_FORM_TEXTAREA  add constraint UK_FORM_TEXTAREA unique (INSTANCEID, TEXTAREAID, VERSION);
+alter table PH_FORM_TEXTAREA  add constraint FK_FORM_TEXTAREA foreign key (INSTANCEID)  references PH_FORM_INSTANCE (ID);
+
+create table PH_FORM(  ID       VARCHAR(50) not null,  FORMID   VARCHAR(100) not null,  FORMNAME VARCHAR(500) not null,  FORMPATH VARCHAR(500) not null);
+create table PH_FORM_INSTANCE(  ID      VARCHAR(50) not null,  FORMID  VARCHAR(50) not null,  VERSION numeric default 0 not null);
+create table PH_FORM_ROLE(  ID       VARCHAR(50) not null,  ROLENAME VARCHAR(500) not null);
+create table PH_FORM_ROLERELATION(  ID         VARCHAR(50) not null,  FORMID     VARCHAR(50) not null,  ROLEID     VARCHAR(50) not null,  ELEMENTID  VARCHAR(50) not null,  PERMISSION VARCHAR(10) not null);
+create table PH_FORM_CHECKBOX
+(
+  INSTANCEID    VARCHAR(50) not null,
+  CHECKBOXID    VARCHAR(50) not null,
+  CHECKBOXVALUE VARCHAR(1),
+  VERSION       numeric default 0 not null,
+  ID            VARCHAR(50) not null
+);
+create table PH_FORM_TEXT(  INSTANCEID VARCHAR(50) not null,  TEXTID     VARCHAR(50) not null,  TEXTVALUE  VARCHAR(4000),  VERSION    numeric default 0 not null,  ID         VARCHAR(50) not null);
+create table PH_FORM_TEXTAREA(  INSTANCEID    VARCHAR(50) not null,  TEXTAREAID    VARCHAR(50) not null,  TEXTAREAVALUE VARCHAR(4000),  VERSION       numeric default 0 not null,  ID            VARCHAR(50) not null);
+
+alter table PH_FORM  add constraint PK_FORM primary key (ID);
+alter table PH_FORM  add constraint UK_FORM unique (FORMID);
+alter table PH_FORM_INSTANCE  add constraint PK_FORM_INSTANCE primary key (ID);
+alter table PH_FORM_INSTANCE  add constraint FK_FORM_INSTANCE foreign key (FORMID)  references PH_FORM (ID);
+alter table PH_FORM_ROLE  add constraint PK_FORM_ROLE primary key (ID);
+alter table PH_FORM_ROLERELATION  add constraint PK_FORM_ROLERELATION primary key (ID);
+alter table PH_FORM_ROLERELATION  add constraint FK_FORM_ROLERELATION1 foreign key (FORMID)  references PH_FORM (ID);
+alter table PH_FORM_ROLERELATION  add constraint FK_FORM_ROLERELATION2 foreign key (ROLEID)  references PH_FORM_ROLE (ID);
+alter table PH_FORM_CHECKBOX add constraint PK_FORM_CHECKBOX primary key (ID);
+alter table PH_FORM_CHECKBOX add constraint UK_FORM_CHECKBOX unique (INSTANCEID, CHECKBOXID, VERSION);
+alter table PH_FORM_CHECKBOX add constraint FK_FORM_CHECKBOX foreign key (INSTANCEID) references PH_FORM_INSTANCE (ID);
+alter table PH_FORM_TEXT  add constraint PK_FORM_TEXT primary key (ID);
+alter table PH_FORM_TEXT  add constraint UK_FORM_TEXT unique (INSTANCEID, TEXTID, VERSION);
+alter table PH_FORM_TEXT  add constraint FK_FORM_TEXT foreign key (INSTANCEID)  references PH_FORM_INSTANCE (ID);
+alter table PH_FORM_TEXTAREA  add constraint PK_FORM_TEXTAREA primary key (ID);
+alter table PH_FORM_TEXTAREA  add constraint UK_FORM_TEXTAREA unique (INSTANCEID, TEXTAREAID, VERSION);
+alter table PH_FORM_TEXTAREA  add constraint FK_FORM_TEXTAREA foreign key (INSTANCEID)  references PH_FORM_INSTANCE (ID);
