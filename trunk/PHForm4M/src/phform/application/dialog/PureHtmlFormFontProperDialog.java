@@ -8,6 +8,7 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -36,9 +37,12 @@ public class PureHtmlFormFontProperDialog extends JDialog
     private FontBean fontBean = null;
     
     public PureHtmlFormFontProperDialog(PureHtmlFormSingleFrame f,
-            FontBean fontBean) throws HeadlessException
+            FontBean fontBean) throws HeadlessException,
+            UnsupportedEncodingException
     {
-        super(f, "文本属性", true);
+        // 文本属性
+        super(f, new String(new byte[] { -26, -106, -121, -26, -100, -84, -27,
+                -79, -98, -26, -128, -89 }, "UTF-8"), true);
         this.frame = f;
         this.fontBean = fontBean;
         initControlPanel();
@@ -61,7 +65,7 @@ public class PureHtmlFormFontProperDialog extends JDialog
         setBounds((screenW - 500) / 2, (screenH - 400) / 2, 500, 400);
     }
     
-    private void initControlPanel()
+    private void initControlPanel() throws UnsupportedEncodingException
     {
         String fontNames[] =
             GraphicsEnvironment.getLocalGraphicsEnvironment()
@@ -82,13 +86,17 @@ public class PureHtmlFormFontProperDialog extends JDialog
         }
         
         fontString.setWrapStyleWord(true);
-        fontString.setFont(new Font("宋体", Font.PLAIN, 12));
+        // 宋体
+        fontString.setFont(new Font(new String(new byte[] { -27, -82, -117,
+                -28, -67, -109 }, "UTF-8"), Font.PLAIN, 12));
         
         if (null != fontBean)
         {
             if (null == fontBean.getFont())
             {
-                fontBean.setFont(new Font("宋体", Font.PLAIN, 12));
+                // 宋体
+                fontBean.setFont(new Font(new String(new byte[] { -27, -82,
+                        -117, -28, -67, -109 }, "UTF-8"), Font.PLAIN, 12));
             }
             
             if (null != fontBean.getFont())

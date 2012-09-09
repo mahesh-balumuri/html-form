@@ -3,6 +3,7 @@ package phform.application.frame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
@@ -34,7 +35,14 @@ public class PureHtmlFormSingleFrame extends JFrame
         phRootPane.setJMenuBar(phMenuBar);
         
         phPane = getContentPane();
-        phToolBar = new PureHtmlFormSingleToolBar(this);
+        try
+        {
+            phToolBar = new PureHtmlFormSingleToolBar(this);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
         phPane.add(phToolBar, BorderLayout.NORTH);
         phPane.setBackground(Color.GRAY);
         right = new JTabbedPane();

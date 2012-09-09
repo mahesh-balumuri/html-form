@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -369,7 +371,14 @@ public class PureHtmlFormSingleCanvas extends JPanel
                     {
                         if (null == popM)
                         {
-                            popM = new PureHtmlFormSinglePopMenu(mainFrame);
+                            try
+                            {
+                                popM = new PureHtmlFormSinglePopMenu(mainFrame);
+                            }
+                            catch (UnsupportedEncodingException e1)
+                            {
+                                e1.printStackTrace();
+                            }
                         }
                         popM.show(e.getComponent(), e.getX(), e.getY());
                     }
@@ -438,9 +447,16 @@ public class PureHtmlFormSingleCanvas extends JPanel
                                 {
                                     if (null == popM)
                                     {
-                                        popM =
-                                            new PureHtmlFormSinglePopMenu(
-                                                    mainFrame);
+                                        try
+                                        {
+                                            popM =
+                                                new PureHtmlFormSinglePopMenu(
+                                                        mainFrame);
+                                        }
+                                        catch (UnsupportedEncodingException e1)
+                                        {
+                                            e1.printStackTrace();
+                                        }
                                     }
                                     if (beanSelected.size() == 1)
                                     {
@@ -519,9 +535,16 @@ public class PureHtmlFormSingleCanvas extends JPanel
                                 {
                                     if (null == popM)
                                     {
-                                        popM =
-                                            new PureHtmlFormSinglePopMenu(
-                                                    mainFrame);
+                                        try
+                                        {
+                                            popM =
+                                                new PureHtmlFormSinglePopMenu(
+                                                        mainFrame);
+                                        }
+                                        catch (UnsupportedEncodingException e1)
+                                        {
+                                            e1.printStackTrace();
+                                        }
                                     }
                                     if (beanSelected.size() == 1)
                                     {
@@ -640,10 +663,22 @@ public class PureHtmlFormSingleCanvas extends JPanel
                             htmlBeanList.add(fontBean);
                             beanSelected.add(fontBean);
                             setSaved(false);
-                            PureHtmlFormFontProperDialog fontDialog =
-                                new PureHtmlFormFontProperDialog(frame,
-                                        fontBean);
-                            fontDialog.show();
+                            PureHtmlFormFontProperDialog fontDialog;
+                            try
+                            {
+                                fontDialog =
+                                    new PureHtmlFormFontProperDialog(frame,
+                                            fontBean);
+                                fontDialog.show();
+                            }
+                            catch (HeadlessException e1)
+                            {
+                                e1.printStackTrace();
+                            }
+                            catch (UnsupportedEncodingException e1)
+                            {
+                                e1.printStackTrace();
+                            }
                         }
                         else
                         {

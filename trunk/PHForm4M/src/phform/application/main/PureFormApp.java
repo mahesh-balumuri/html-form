@@ -1,6 +1,7 @@
 package phform.application.main;
 
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -48,10 +49,27 @@ public class PureFormApp
                 if (null != frame && null != frame.getCanvas()
                         && !frame.getCanvas().isSaved())
                 {
-                    int confirm =
-                        JOptionPane.showConfirmDialog(frame, frame.getCanvas()
-                                .getCanvasName()
-                                + "尚未保存,是否保存?");
+                    // 尚未保存,是否保存?
+                    int confirm = -99;
+                    try
+                    {
+                        confirm =
+                            JOptionPane.showConfirmDialog(frame, frame
+                                    .getCanvas().getCanvasName()
+                                    + new String(new byte[] { -27, -80, -102,
+                                            -26, -100, -86, -28, -65, -99, -27,
+                                            -83, -104, 44, -26, -104, -81, -27,
+                                            -112, -90, -28, -65, -99, -27, -83,
+                                            -104, 63 }, "UTF-8"));
+                    }
+                    catch (HeadlessException e1)
+                    {
+                        e1.printStackTrace();
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                     switch (confirm)
                     {
                     case JOptionPane.OK_OPTION:

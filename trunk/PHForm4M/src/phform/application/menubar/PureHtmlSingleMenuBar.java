@@ -1,5 +1,7 @@
 package phform.application.menubar;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.swing.JMenuBar;
 
 import phform.application.frame.PureHtmlFormSingleFrame;
@@ -16,9 +18,23 @@ public class PureHtmlSingleMenuBar extends JMenuBar
     {
         super();
         frame = c;
-        fileMenu = new PureHtmlFormSingleFileMenu(frame);
+        try
+        {
+            fileMenu = new PureHtmlFormSingleFileMenu(frame);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
         add(fileMenu);
-        add(new PureHtmlFormHelpMenu(frame));
+        try
+        {
+            add(new PureHtmlFormHelpMenu(frame));
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public PureHtmlFormSingleFileMenu getFileMenu()
