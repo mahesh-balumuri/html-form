@@ -1,8 +1,10 @@
 package phform.application.toolbar;
 
 import java.awt.Cursor;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
@@ -63,24 +65,62 @@ public class PureHtmlFormSingleToolBar extends JToolBar
         new JButton(ImageIconUtil.getImageIcon("redo.gif"));
     
     public PureHtmlFormSingleToolBar(PureHtmlFormSingleFrame c)
+            throws UnsupportedEncodingException
     {
         super();
         frame = c;
-        insertTableBut.setToolTipText("插入表格");
-        insertStringBut.setToolTipText("插入文字");
-        insertCheckBoxBut.setToolTipText("插入复选框");
-        insertTextAreaBut.setToolTipText("插入多行文本框");
-        insertTextFieldBut.setToolTipText("插入单行文本框");
-        autoInputBut.setToolTipText("填充文本框");
-        centerJustifyBut.setToolTipText("左右中间对齐");
-        leftJustifyBut.setToolTipText("左对齐");
-        rightJustifyBut.setToolTipText("右对齐");
-        textJustifyBut.setToolTipText("文本自适应");
-        middleJustifyBut.setToolTipText("上下中间对齐");
-        topJustifyBut.setToolTipText("上对齐");
-        bottomJustifyBut.setToolTipText("下对齐");
-        undoBut.setToolTipText("撤销");
-        redoBut.setToolTipText("重做");
+        // 插入表格
+        insertTableBut.setToolTipText(new String(new byte[] { -26, -113, -110,
+                -27, -123, -91, -24, -95, -88, -26, -96, -68 }, "UTF-8"));
+        // 插入文字
+        insertStringBut.setToolTipText(new String(new byte[] { -26, -113, -110,
+                -27, -123, -91, -26, -106, -121, -27, -83, -105 }, "UTF-8"));
+        // 插入复选框
+        insertCheckBoxBut.setToolTipText(new String(new byte[] { -26, -113,
+                -110, -27, -123, -91, -27, -92, -115, -23, -128, -119, -26,
+                -95, -122 }, "UTF-8"));
+        // 插入多行文本框
+        insertTextAreaBut.setToolTipText(new String(new byte[] { -26, -113,
+                -110, -27, -123, -91, -27, -92, -102, -24, -95, -116, -26,
+                -106, -121, -26, -100, -84, -26, -95, -122 }, "UTF-8"));
+        // 插入单行文本框
+        insertTextFieldBut.setToolTipText(new String(new byte[] { -26, -113,
+                -110, -27, -123, -91, -27, -115, -107, -24, -95, -116, -26,
+                -106, -121, -26, -100, -84, -26, -95, -122 }, "UTF-8"));
+        // 填充文本框
+        autoInputBut.setToolTipText(new String(new byte[] { -27, -95, -85, -27,
+                -123, -123, -26, -106, -121, -26, -100, -84, -26, -95, -122 },
+                "UTF-8"));
+        // 左右中间对齐
+        centerJustifyBut.setToolTipText(new String(new byte[] { -27, -73, -90,
+                -27, -113, -77, -28, -72, -83, -23, -105, -76, -27, -81, -71,
+                -23, -67, -112 }, "UTF-8"));
+        // 左对齐
+        leftJustifyBut.setToolTipText(new String(new byte[] { -27, -73, -90,
+                -27, -81, -71, -23, -67, -112 }, "UTF-8"));
+        // 右对齐
+        rightJustifyBut.setToolTipText(new String(new byte[] { -27, -113, -77,
+                -27, -81, -71, -23, -67, -112 }, "UTF-8"));
+        // 文本自适应
+        textJustifyBut.setToolTipText(new String(
+                new byte[] { -26, -106, -121, -26, -100, -84, -24, -121, -86,
+                        -23, -128, -126, -27, -70, -108 }, "UTF-8"));
+        // 上下中间对齐
+        middleJustifyBut.setToolTipText(new String(new byte[] { -28, -72, -118,
+                -28, -72, -117, -28, -72, -83, -23, -105, -76, -27, -81, -71,
+                -23, -67, -112 }, "UTF-8"));
+        // 上对齐
+        topJustifyBut.setToolTipText(new String(new byte[] { -28, -72, -118,
+                -27, -81, -71, -23, -67, -112 }, "UTF-8"));
+        //下对齐
+        bottomJustifyBut.setToolTipText(new String(new byte[] { -28, -72, -117,
+                -27, -81, -71, -23, -67, -112 }, "UTF-8"));
+        //撤销
+        undoBut.setToolTipText(new String(new byte[] { -26, -110, -92, -23,
+                -108, -128 }, "UTF-8"));
+        //重做
+        redoBut.setToolTipText(new String(new byte[] { -23, -121, -115, -27,
+                -127, -102 }, "UTF-8"));
         add(insertTableBut);
         add(insertStringBut);
         add(insertCheckBoxBut);
@@ -188,9 +228,20 @@ public class PureHtmlFormSingleToolBar extends JToolBar
                 toggleAllBut();
                 frame.getCanvas().setCursorStyle(0);
                 
-                PureHtmlFormSingleTableDialog dialog =
-                    new PureHtmlFormSingleTableDialog(frame);
-                dialog.show();
+                PureHtmlFormSingleTableDialog dialog;
+                try
+                {
+                    dialog = new PureHtmlFormSingleTableDialog(frame);
+                    dialog.show();
+                }
+                catch (HeadlessException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (UnsupportedEncodingException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
         });
         

@@ -1,8 +1,10 @@
 package phform.application.popmenu;
 
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.swing.JMenu;
@@ -47,10 +49,14 @@ public class PureHtmlFormSinglePopMenu extends JPopupMenu
     private JMenuItem delete;
     
     public PureHtmlFormSinglePopMenu(PureHtmlFormSingleFrame f)
+            throws UnsupportedEncodingException
     {
         super();
         frame = f;
-        property = new JMenuItem("属性");
+        // 属性
+        property =
+            new JMenuItem(new String(
+                    new byte[] { -27, -79, -98, -26, -128, -89 }, "UTF-8"));
         property.addActionListener(new ActionListener()
         {
             
@@ -61,36 +67,81 @@ public class PureHtmlFormSinglePopMenu extends JPopupMenu
                 Object selected = beanSelected.get(0);
                 if (selected instanceof FontBean)
                 {
-                    PureHtmlFormFontProperDialog dialog =
-                        new PureHtmlFormFontProperDialog(frame,
-                                (FontBean) selected);
-                    dialog.show();
+                    PureHtmlFormFontProperDialog dialog;
+                    try
+                    {
+                        dialog =
+                            new PureHtmlFormFontProperDialog(frame,
+                                    (FontBean) selected);
+                        dialog.show();
+                    }
+                    catch (HeadlessException e1)
+                    {
+                        e1.printStackTrace();
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                 }
                 else
                 {
-                    PureHtmlFormEleProperDialog dialog =
-                        new PureHtmlFormEleProperDialog(frame);
-                    dialog.show();
+                    PureHtmlFormEleProperDialog dialog;
+                    try
+                    {
+                        dialog = new PureHtmlFormEleProperDialog(frame);
+                        dialog.show();
+                    }
+                    catch (HeadlessException e1)
+                    {
+                        e1.printStackTrace();
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
         add(property);
         
-        tableSubMenu = new JMenu("表格");
-        splitTable = new JMenuItem("拆分单元格...");
+        // 表格
+        tableSubMenu =
+            new JMenu(new String(new byte[] { -24, -95, -88, -26, -96, -68 },
+                    "UTF-8"));
+        // 拆分单元格...
+        splitTable =
+            new JMenuItem(new String(new byte[] { -26, -117, -122, -27, -120,
+                    -122, -27, -115, -107, -27, -123, -125, -26, -96, -68, 46,
+                    46, 46 }, "UTF-8"));
         splitTable.addActionListener(new ActionListener()
         {
             
             public void actionPerformed(ActionEvent e)
             {
-                PureHtmlFormSingleSplitDialog dialog =
-                    new PureHtmlFormSingleSplitDialog(frame);
-                dialog.show();
+                PureHtmlFormSingleSplitDialog dialog;
+                try
+                {
+                    dialog = new PureHtmlFormSingleSplitDialog(frame);
+                    dialog.show();
+                }
+                catch (HeadlessException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (UnsupportedEncodingException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
         });
         tableSubMenu.add(splitTable);
         
-        mergeTable = new JMenuItem("合并单元格");
+        // 合并单元格
+        mergeTable =
+            new JMenuItem(new String(new byte[] { -27, -112, -120, -27, -71,
+                    -74, -27, -115, -107, -27, -123, -125, -26, -96, -68 },
+                    "UTF-8"));
         mergeTable.addActionListener(new ActionListener()
         {
             
@@ -107,7 +158,11 @@ public class PureHtmlFormSinglePopMenu extends JPopupMenu
         });
         tableSubMenu.add(mergeTable);
         
-        addTrBelow = new JMenuItem("下方增加行");
+        // 下方增加行
+        addTrBelow =
+            new JMenuItem(new String(new byte[] { -28, -72, -117, -26, -106,
+                    -71, -27, -94, -98, -27, -118, -96, -24, -95, -116 },
+                    "UTF-8"));
         addTrBelow.addActionListener(new ActionListener()
         {
             
@@ -123,7 +178,11 @@ public class PureHtmlFormSinglePopMenu extends JPopupMenu
         });
         tableSubMenu.add(addTrBelow);
         
-        addTrAbove = new JMenuItem("上方增加行");
+        // 上方增加行
+        addTrAbove =
+            new JMenuItem(new String(new byte[] { -28, -72, -118, -26, -106,
+                    -71, -27, -94, -98, -27, -118, -96, -24, -95, -116 },
+                    "UTF-8"));
         addTrAbove.addActionListener(new ActionListener()
         {
             
@@ -139,7 +198,10 @@ public class PureHtmlFormSinglePopMenu extends JPopupMenu
         });
         tableSubMenu.add(addTrAbove);
         
-        deleteTr = new JMenuItem("删除行");
+        // 删除行
+        deleteTr =
+            new JMenuItem(new String(new byte[] { -27, -120, -96, -23, -103,
+                    -92, -24, -95, -116 }, "UTF-8"));
         deleteTr.addActionListener(new ActionListener()
         {
             
@@ -160,34 +222,65 @@ public class PureHtmlFormSinglePopMenu extends JPopupMenu
         });
         tableSubMenu.add(deleteTr);
         
-        splitRow = new JMenuItem("拆分行...");
+        // 拆分行...
+        splitRow =
+            new JMenuItem(new String(new byte[] { -26, -117, -122, -27, -120,
+                    -122, -24, -95, -116, 46, 46, 46 }, "UTF-8"));
         splitRow.addActionListener(new ActionListener()
         {
             
             public void actionPerformed(ActionEvent e)
             {
-                PureHtmlFormSingleSplitRowDialog dialog =
-                    new PureHtmlFormSingleSplitRowDialog(frame);
-                dialog.show();
+                PureHtmlFormSingleSplitRowDialog dialog;
+                try
+                {
+                    dialog = new PureHtmlFormSingleSplitRowDialog(frame);
+                    dialog.show();
+                }
+                catch (HeadlessException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (UnsupportedEncodingException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
         });
         tableSubMenu.add(splitRow);
         
-        splitCol = new JMenuItem("拆分列...");
+        // 拆分列...
+        splitCol =
+            new JMenuItem(new String(new byte[] { -26, -117, -122, -27, -120,
+                    -122, -27, -120, -105, 46, 46, 46 }, "UTF-8"));
         splitCol.addActionListener(new ActionListener()
         {
             
             public void actionPerformed(ActionEvent e)
             {
-                PureHtmlFormSingleSplitColDialog dialog =
-                    new PureHtmlFormSingleSplitColDialog(frame);
-                dialog.show();
+                PureHtmlFormSingleSplitColDialog dialog;
+                try
+                {
+                    dialog = new PureHtmlFormSingleSplitColDialog(frame);
+                    dialog.show();
+                }
+                catch (HeadlessException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (UnsupportedEncodingException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
         });
         tableSubMenu.add(splitCol);
         add(tableSubMenu);
         
-        delete = new JMenuItem("删除");
+        // 删除
+        delete =
+            new JMenuItem(new String(new byte[] { -27, -120, -96, -23, -103,
+                    -92 }, "UTF-8"));
         delete.addActionListener(new ActionListener()
         {
             

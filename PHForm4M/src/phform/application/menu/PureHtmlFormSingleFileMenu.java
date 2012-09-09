@@ -1,5 +1,6 @@
 package phform.application.menu;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -51,8 +52,12 @@ public class PureHtmlFormSingleFileMenu extends JMenu
     private JMenuItem exitMenuItem;
     
     public PureHtmlFormSingleFileMenu(PureHtmlFormSingleFrame c)
+            throws UnsupportedEncodingException
     {
-        super("文件");
+        // 文件
+        super(
+                new String(new byte[] { -26, -106, -121, -28, -69, -74 },
+                        "UTF-8"));
         frame = c;
         chooser = new JFileChooser();
         importChooser = new JFileChooser();
@@ -61,7 +66,10 @@ public class PureHtmlFormSingleFileMenu extends JMenu
         chooser.setFileFilter(fileFilter);
         importChooser.setFileFilter(importFilter);
         
-        newMenuItem = new JMenuItem("新建...");
+        // 新建...
+        newMenuItem =
+            new JMenuItem(new String(new byte[] { -26, -106, -80, -27, -69,
+                    -70, 46, 46, 46 }, "UTF-8"));
         newMenuItem.addActionListener(new ActionListener()
         {
             
@@ -71,9 +79,22 @@ public class PureHtmlFormSingleFileMenu extends JMenu
                 if (null != frame && null != frame.getCanvas()
                         && !frame.getCanvas().isSaved())
                 {
-                    int confirm =
-                        showConfirmDialog(frame.getCanvas().getCanvasName()
-                                + "尚未保存,是否保存?");
+                    // 尚未保存,是否保存?
+                    int confirm = -99;
+                    try
+                    {
+                        confirm =
+                            showConfirmDialog(frame.getCanvas().getCanvasName()
+                                    + new String(new byte[] { -27, -80, -102,
+                                            -26, -100, -86, -28, -65, -99, -27,
+                                            -83, -104, 44, -26, -104, -81, -27,
+                                            -112, -90, -28, -65, -99, -27, -83,
+                                            -104, 63 }, "UTF-8"));
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                     switch (confirm)
                     {
                     case JOptionPane.OK_OPTION:
@@ -114,15 +135,29 @@ public class PureHtmlFormSingleFileMenu extends JMenu
                 if (properShow)
                 {
                     FormUtil.resetMaxId();
-                    PureHtmlFormProperDialog dialog =
-                        new PureHtmlFormProperDialog(frame, true);
-                    dialog.show();
+                    PureHtmlFormProperDialog dialog;
+                    try
+                    {
+                        dialog = new PureHtmlFormProperDialog(frame, true);
+                        dialog.show();
+                    }
+                    catch (HeadlessException e1)
+                    {
+                        e1.printStackTrace();
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
         add(newMenuItem);
         
-        loadMenuItem = new JMenuItem("打开...");
+        // 打开...
+        loadMenuItem =
+            new JMenuItem(new String(new byte[] { -26, -119, -109, -27, -68,
+                    -128, 46, 46, 46 }, "UTF-8"));
         loadMenuItem.addActionListener(new ActionListener()
         {
             
@@ -132,9 +167,22 @@ public class PureHtmlFormSingleFileMenu extends JMenu
                 if (null != frame && null != frame.getCanvas()
                         && !frame.getCanvas().isSaved())
                 {
-                    int confirm =
-                        showConfirmDialog(frame.getCanvas().getCanvasName()
-                                + "尚未保存,是否保存?");
+                    // 尚未保存,是否保存?
+                    int confirm = -99;
+                    try
+                    {
+                        confirm =
+                            showConfirmDialog(frame.getCanvas().getCanvasName()
+                                    + new String(new byte[] { -27, -80, -102,
+                                            -26, -100, -86, -28, -65, -99, -27,
+                                            -83, -104, 44, -26, -104, -81, -27,
+                                            -112, -90, -28, -65, -99, -27, -83,
+                                            -104, 63 }, "UTF-8"));
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                     switch (confirm)
                     {
                     case JOptionPane.OK_OPTION:
@@ -221,7 +269,10 @@ public class PureHtmlFormSingleFileMenu extends JMenu
         });
         add(loadMenuItem);
         
-        saveMenuItem = new JMenuItem("保存");
+        // 保存
+        saveMenuItem =
+            new JMenuItem(new String(
+                    new byte[] { -28, -65, -99, -27, -83, -104 }, "UTF-8"));
         saveMenuItem.addActionListener(new ActionListener()
         {
             
@@ -252,7 +303,10 @@ public class PureHtmlFormSingleFileMenu extends JMenu
         });
         add(saveMenuItem);
         
-        properMenuItem = new JMenuItem("属性...");
+        // 属性...
+        properMenuItem =
+            new JMenuItem(new String(new byte[] { -27, -79, -98, -26, -128,
+                    -89, 46, 46, 46 }, "UTF-8"));
         properMenuItem.addActionListener(new ActionListener()
         {
             
@@ -260,15 +314,29 @@ public class PureHtmlFormSingleFileMenu extends JMenu
             {
                 if (null != frame && null != frame.getCanvas())
                 {
-                    PureHtmlFormProperDialog dialog =
-                        new PureHtmlFormProperDialog(frame, false);
-                    dialog.show();
+                    PureHtmlFormProperDialog dialog;
+                    try
+                    {
+                        dialog = new PureHtmlFormProperDialog(frame, false);
+                        dialog.show();
+                    }
+                    catch (HeadlessException e1)
+                    {
+                        e1.printStackTrace();
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
         add(properMenuItem);
         
-        closeMenuItem = new JMenuItem("关闭");
+        // 关闭
+        closeMenuItem =
+            new JMenuItem(new String(new byte[] { -27, -123, -77, -23, -105,
+                    -83 }, "UTF-8"));
         closeMenuItem.addActionListener(new ActionListener()
         {
             
@@ -277,9 +345,22 @@ public class PureHtmlFormSingleFileMenu extends JMenu
                 if (null != frame && null != frame.getCanvas()
                         && !frame.getCanvas().isSaved())
                 {
-                    int confirm =
-                        showConfirmDialog(frame.getCanvas().getCanvasName()
-                                + "尚未保存,是否保存?");
+                    // 尚未保存,是否保存?
+                    int confirm = -99;
+                    try
+                    {
+                        confirm =
+                            showConfirmDialog(frame.getCanvas().getCanvasName()
+                                    + new String(new byte[] { -27, -80, -102,
+                                            -26, -100, -86, -28, -65, -99, -27,
+                                            -83, -104, 44, -26, -104, -81, -27,
+                                            -112, -90, -28, -65, -99, -27, -83,
+                                            -104, 63 }, "UTF-8"));
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                     switch (confirm)
                     {
                     case JOptionPane.OK_OPTION:
@@ -315,7 +396,10 @@ public class PureHtmlFormSingleFileMenu extends JMenu
         });
         add(closeMenuItem);
         
-        exitMenuItem = new JMenuItem("退出");
+        // 退出
+        exitMenuItem =
+            new JMenuItem(new String(new byte[] { -23, -128, -128, -27, -121,
+                    -70 }, "UTF-8"));
         exitMenuItem.addActionListener(new ActionListener()
         {
             
@@ -325,9 +409,22 @@ public class PureHtmlFormSingleFileMenu extends JMenu
                 if (null != frame && null != frame.getCanvas()
                         && !frame.getCanvas().isSaved())
                 {
-                    int confirm =
-                        showConfirmDialog(frame.getCanvas().getCanvasName()
-                                + "尚未保存,是否保存?");
+                    // 尚未保存,是否保存?
+                    int confirm = -99;
+                    try
+                    {
+                        confirm =
+                            showConfirmDialog(frame.getCanvas().getCanvasName()
+                                    + new String(new byte[] { -27, -80, -102,
+                                            -26, -100, -86, -28, -65, -99, -27,
+                                            -83, -104, 44, -26, -104, -81, -27,
+                                            -112, -90, -28, -65, -99, -27, -83,
+                                            -104, 63 }, "UTF-8"));
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        e1.printStackTrace();
+                    }
                     switch (confirm)
                     {
                     case JOptionPane.OK_OPTION:

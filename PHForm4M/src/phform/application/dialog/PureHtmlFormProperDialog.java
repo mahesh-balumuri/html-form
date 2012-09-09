@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -30,9 +31,11 @@ public class PureHtmlFormProperDialog extends JDialog
     private JTextField nameText = new JTextField();
     
     public PureHtmlFormProperDialog(PureHtmlFormSingleFrame f, boolean isNew)
-            throws HeadlessException
+            throws HeadlessException, UnsupportedEncodingException
     {
-        super(f, "表单属性", true);
+        // 表单属性
+        super(f, new String(new byte[] { -24, -95, -88, -27, -115, -107, -27,
+                -79, -98, -26, -128, -89 }, "UTF-8"), true);
         this.frame = f;
         this.isNew = isNew;
         if (null != frame.getCanvas() && !isNew)
@@ -49,18 +52,32 @@ public class PureHtmlFormProperDialog extends JDialog
         Container dialogPane = getContentPane();
         dialogPane.setLayout(gridbag);
         
-        JLabel label = new JLabel("表单名称 : ");
-        gridx = 0; // 第0列
-        gridy = 0; // 第0行
-        gridwidth = 1; // 占一单位宽度
-        gridheight = 1; // 占一单位高度
-        weightx = 0; // 窗口增大时组件宽度增大比率0
-        weighty = 0; // 窗口增大时组件高度增大比率0
-        anchor = GridBagConstraints.CENTER; // 容器大于组件size时将组件置于容器中央
-        fill = GridBagConstraints.BOTH; // 窗口拉大时会填满水平与垂直空间
-        inset = new Insets(5, 5, 0, 5); // 组件间间距
-        ipadx = 0; // 组件内水平宽度
-        ipady = 0; // 组件内垂直高度
+        // 表单名称 :
+        JLabel label =
+            new JLabel(new String(new byte[] { -24, -95, -88, -27, -115, -107,
+                    -27, -112, -115, -25, -89, -80, 32, 58, 32 }, "UTF-8"));
+        // 第0列
+        gridx = 0;
+        // 第0行
+        gridy = 0;
+        // 占一单位宽度
+        gridwidth = 1;
+        // 占一单位高度
+        gridheight = 1;
+        // 窗口增大时组件宽度增大比率0
+        weightx = 0;
+        // 窗口增大时组件高度增大比率0
+        weighty = 0;
+        // 容器大于组件size时将组件置于容器中央
+        anchor = GridBagConstraints.CENTER;
+        // 窗口拉大时会填满水平与垂直空间
+        fill = GridBagConstraints.BOTH;
+        // 组件间间距
+        inset = new Insets(5, 5, 0, 5);
+        // 组件内水平宽度
+        ipadx = 0;
+        // 组件内垂直高度
+        ipady = 0;
         gridbagConst =
             new GridBagConstraints(gridx, gridy, gridwidth, gridheight,
                     weightx, weighty, anchor, fill, inset, ipadx, ipady);
@@ -81,9 +98,15 @@ public class PureHtmlFormProperDialog extends JDialog
         
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 2));
-        JButton confirmButton = new JButton("确定");
+        // 确定
+        JButton confirmButton =
+            new JButton(new String(
+                    new byte[] { -25, -95, -82, -27, -82, -102 }, "UTF-8"));
         panel.add(confirmButton);
-        JButton cancelButton = new JButton("取消");
+        // 取消
+        JButton cancelButton =
+            new JButton(new String(
+                    new byte[] { -27, -113, -106, -26, -74, -120 }, "UTF-8"));
         panel.add(cancelButton);
         
         gridx = 0;
