@@ -17,7 +17,7 @@ public class SubmitAction extends BaseAction
 {
     private String[] iframeValue;
     
-    private InputStream formoutStream;
+    private InputStream testFormoutStream;
     
     private String formId;
     
@@ -145,7 +145,7 @@ public class SubmitAction extends BaseAction
             out.flush();
             out.close();
             
-            formoutStream = conn.getInputStream();
+            testFormoutStream = conn.getInputStream();
             int code = conn.getResponseCode();
             if (code != 200)
             {
@@ -169,7 +169,7 @@ public class SubmitAction extends BaseAction
         {
             if (null != conn)
             {
-                conn.disconnect();
+//                conn.disconnect();
             }
         }
         return SUCCESS;
@@ -215,7 +215,7 @@ public class SubmitAction extends BaseAction
             out.flush();
             out.close();
             
-            formoutStream = conn.getInputStream();
+            testFormoutStream = conn.getInputStream();
             int code = conn.getResponseCode();
             if (code != 200)
             {
@@ -239,7 +239,7 @@ public class SubmitAction extends BaseAction
         {
             if (null != conn)
             {
-                conn.disconnect();
+//                conn.disconnect();
             }
         }
         return SUCCESS;
@@ -295,14 +295,14 @@ public class SubmitAction extends BaseAction
         this.version = version;
     }
     
-    public InputStream getFormoutStream()
+    public InputStream getTestFormoutStream()
     {
-        return formoutStream;
+        return testFormoutStream;
     }
     
-    public void setFormoutStream(InputStream formoutStream)
+    public void setTestFormoutStream(InputStream testFormoutStream)
     {
-        this.formoutStream = formoutStream;
+        this.testFormoutStream = testFormoutStream;
     }
 
     public String getNavigatorUserAgent()

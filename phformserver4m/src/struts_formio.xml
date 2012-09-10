@@ -36,7 +36,7 @@
 	    </action>
 	    <action name="testFormOut" class="submitAction" method="testFormOut">
 			<result name="success" type="stream">
-				<param name="inputName">formoutStream</param>
+				<param name="inputName">testFormoutStream</param>
 				<param name="contentType">text/html</param>
 <!--
 				<param name="contentDisposition">
@@ -48,7 +48,7 @@
 	    </action>
 	    <action name="testFormPrint" class="submitAction" method="testFormPrint">
 			<result name="success" type="stream">
-				<param name="inputName">formoutStream</param>
+				<param name="inputName">testFormoutStream</param>
 				<param name="contentType">text/html</param>
 <!--
 				<param name="contentDisposition">
