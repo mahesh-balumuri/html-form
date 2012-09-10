@@ -85,7 +85,7 @@ public class FontBean extends OtherObject implements PaintInterface
             stringList.clear();
             startList.clear();
             
-            int fontHeight = fm.getHeight();
+            int fontHeight = getFontHeight();
             int fontAscent = fm.getAscent();
 //            int fontDescent = fm.getDescent();
 //            int fontLeading = fm.getLeading();
@@ -191,7 +191,7 @@ public class FontBean extends OtherObject implements PaintInterface
                 parseFontPosition();
             }
             g.setFont(font);
-            int fontHeight = fm.getHeight();
+            int fontHeight = getFontHeight();
             for (int i = 0; i < stringList.size(); i++)
             {
                 if (fontHeight * (i + 1) > this.height)
@@ -246,7 +246,7 @@ public class FontBean extends OtherObject implements PaintInterface
     {
         if (!"".equals(innerString))
         {
-            int fontHeight = fm.getHeight();
+            int fontHeight = getFontHeight();
             int finalWidth = 0;
             int finalHeight = stringList.size() * fontHeight;
             for (int i = 0; i < stringList.size(); i++)
@@ -271,6 +271,12 @@ public class FontBean extends OtherObject implements PaintInterface
             }
         }
     }
+    
+    private int getFontHeight()
+    {
+        return fm.getHeight() - fm.getLeading();
+    }
+    
     public void cloneMe(FormObject formObj)
     {
         super.cloneMe(formObj);
