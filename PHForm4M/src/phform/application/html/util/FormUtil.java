@@ -259,6 +259,17 @@ public class FormUtil
                     + "table td{border:#000000 solid;border-width:0 1px 1px 0;}"
                     + Constants.LINE_SEPARATOR
                     + Constants.STYLESPACEPREFIX
+
+                    + "textarea{resize: none;}"
+                    + Constants.LINE_SEPARATOR
+                    + Constants.STYLESPACEPREFIX
+                    + "textarea:focus,input[type=text]:focus{outline: none;}"
+                    + Constants.LINE_SEPARATOR
+                    + Constants.STYLESPACEPREFIX
+                    + "font{line-height: 100%;}"
+                    + Constants.LINE_SEPARATOR
+                    + Constants.STYLESPACEPREFIX
+                    
                     + ".textborder{border:solid 1px #000000;border-left-width:0px; border-top-width:0px; border-right-width:0px;}"
                     + Constants.LINE_SEPARATOR
                     + Constants.STYLESPACEPREFIX
