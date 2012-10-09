@@ -172,7 +172,7 @@ public class FormMemory
         }
     }
     
-    public synchronized FormInMem queryForm(Form f)
+    public FormInMem queryForm(Form f)
     {
         if (FLog.isDebug())
         {
