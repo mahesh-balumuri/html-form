@@ -14,26 +14,18 @@ function gatherIframeValues(frameId)
 				alert("字段值过长!");
 				return "";
 			}
-			else
-			{
-				if(testSpecial(input_elements[i].value))
-				{
-					alert("不能包含特殊字符#=!");
-					return "";
-				}
-			}
-			values += "#" + input_elements[i].id + "=" + input_elements[i].value;
+			values += "#" + encodeValue(input_elements[i].id) + "@" + encodeValue(input_elements[i].value);
 		}
 		else if(input_elements[i].type == "checkbox")
 		{
 			if(input_elements[i].checked)
 			{
-				values += "#" + input_elements[i].id + "=" + "1";
+				values += "#" + encodeValue(input_elements[i].id) + "@" + "1";
 			}
 		}
 		else if(input_elements[i].type == "hidden")
 		{
-			values += "#" + input_elements[i].id + "=" + input_elements[i].value;
+			values += "#" + encodeValue(input_elements[i].id) + "@" + encodeValue(input_elements[i].value);
 		}
 	}
 	for(var j = 0; j < textarea_elements.length; j++)
@@ -43,18 +35,10 @@ function gatherIframeValues(frameId)
 			alert("字段值过长!");
 			return "";
 		}
-		else
-		{
-			if(testSpecial(textarea_elements[j].value))
-			{
-				alert("不能包含特殊字符#=!");
-				return "";
-			}
-		}
-		values += "#" + textarea_elements[j].id + "=" + textarea_elements[j].value;
+		values += "#" + encodeValue(textarea_elements[j].id) + "@" + encodeValue(textarea_elements[j].value);
 	}
 	//return "iframeValue=" + encodeURIComponent(values);
-	return encodeURIComponent(values).replace(/%/g,"08ba728cc56545fcbb8a3524a0e9ac68");
+	return values;
 }
 
 function gatherURI(frameId)
@@ -70,8 +54,7 @@ function gatherURI(frameId)
 	}
 }
 
-function testSpecial(str)
+function encodeValue(value2Encode)
 {
-	var reg = /[#=]/;
-	return reg.test(str);
+	return encodeURIComponent(value2Encode).replace(/%/g,",");
 }

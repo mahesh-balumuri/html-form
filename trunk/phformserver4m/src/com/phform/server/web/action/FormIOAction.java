@@ -77,9 +77,7 @@ public class FormIOAction extends BaseAction
                 for (int j = 0; j < iframeValues.size(); j++)
                 {
                     String singleValue = (String) iframeValues.get(j);
-                    String valuesSharp =
-                        URLDecoder.decode(singleValue, "UTF-8");
-                    String[] values = valuesSharp.split("#");
+                    String[] values = singleValue.split("#");
                     
                     if (null != values && values.length > 0)
                     {
@@ -88,15 +86,19 @@ public class FormIOAction extends BaseAction
                         {
                             if (values[i] != null)
                             {
-                                String[] tmp = values[i].split("=");
+                                String[] tmp = values[i].split("@");
                                 if (null != tmp && tmp.length > 0)
                                 {
                                     String key = "";
                                     String value = "";
                                     try
                                     {
-                                        key = tmp[0].trim();
-                                        value = tmp[1].trim();
+                                        key =
+                                            URLDecoder.decode(tmp[0].trim(),
+                                                    "UTF-8");
+                                        value =
+                                            URLDecoder.decode(tmp[1].trim(),
+                                                    "UTF-8");
                                     }
                                     catch (Exception e)
                                     {
@@ -1006,16 +1008,7 @@ public class FormIOAction extends BaseAction
             for (int j = 0; j < iframeValues.size(); j++)
             {
                 String singleValue = (String) iframeValues.get(j);
-                String valuesSharp = "";
-                try
-                {
-                    valuesSharp = URLDecoder.decode(singleValue, "UTF-8");
-                }
-                catch (UnsupportedEncodingException e1)
-                {
-                    e1.printStackTrace();
-                }
-                String[] values = valuesSharp.split("#");
+                String[] values = singleValue.split("#");
                 
                 if (null != values && values.length > 0)
                 {
@@ -1024,15 +1017,19 @@ public class FormIOAction extends BaseAction
                     {
                         if (values[i] != null)
                         {
-                            String[] tmp = values[i].split("=");
+                            String[] tmp = values[i].split("@");
                             if (null != tmp && tmp.length > 0)
                             {
                                 String key = "";
                                 String value = "";
                                 try
                                 {
-                                    key = tmp[0].trim();
-                                    value = tmp[1].trim();
+                                    key =
+                                        URLDecoder.decode(tmp[0].trim(),
+                                                "UTF-8");
+                                    value =
+                                        URLDecoder.decode(tmp[1].trim(),
+                                                "UTF-8");
                                 }
                                 catch (Exception e)
                                 {
@@ -1194,16 +1191,7 @@ public class FormIOAction extends BaseAction
             for (int j = 0; j < iframeValues.size(); j++)
             {
                 String singleValue = (String) iframeValues.get(j);
-                String valuesSharp = "";
-                try
-                {
-                    valuesSharp = URLDecoder.decode(singleValue, "UTF-8");
-                }
-                catch (UnsupportedEncodingException e1)
-                {
-                    e1.printStackTrace();
-                }
-                String[] values = valuesSharp.split("#");
+                String[] values = singleValue.split("#");
                 
                 if (null != values && values.length > 0)
                 {
@@ -1212,15 +1200,19 @@ public class FormIOAction extends BaseAction
                     {
                         if (values[i] != null)
                         {
-                            String[] tmp = values[i].split("=");
+                            String[] tmp = values[i].split("@");
                             if (null != tmp && tmp.length > 0)
                             {
                                 String key = "";
                                 String value = "";
                                 try
                                 {
-                                    key = tmp[0].trim();
-                                    value = tmp[1].trim();
+                                    key =
+                                        URLDecoder.decode(tmp[0].trim(),
+                                                "UTF-8");
+                                    value =
+                                        URLDecoder.decode(tmp[1].trim(),
+                                                "UTF-8");
                                 }
                                 catch (Exception e)
                                 {
@@ -1566,8 +1558,7 @@ public class FormIOAction extends BaseAction
             {
                 if (null != iframeValue[i] && !"".equals(iframeValue[i].trim()))
                 {
-                    iframeValues.add(iframeValue[i].trim().replace(
-                            "08ba728cc56545fcbb8a3524a0e9ac68", "%"));
+                    iframeValues.add(iframeValue[i].trim().replace(",", "%"));
                 }
             }
         }
