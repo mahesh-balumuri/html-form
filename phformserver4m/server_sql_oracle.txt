@@ -6,7 +6,8 @@ alter table PH_FORM  add constraint UK_FORM unique (FORMID);
 -- Create table
 create table PH_FORM_INSTANCE(  ID      VARCHAR2(50) not null,  FORMID  VARCHAR2(50) not null,  VERSION NUMBER default 0 not null);
 -- Create/Recreate primary, unique and foreign key constraints 
-alter table PH_FORM_INSTANCE  add constraint PK_FORM_INSTANCE primary key (ID)alter table PH_FORM_INSTANCE  add constraint FK_FORM_INSTANCE foreign key (FORMID)  references PH_FORM (ID);
+alter table PH_FORM_INSTANCE  add constraint PK_FORM_INSTANCE primary key (ID);
+alter table PH_FORM_INSTANCE  add constraint FK_FORM_INSTANCE foreign key (FORMID)  references PH_FORM (ID);
 -- Create table
 create table PH_FORM_ROLE(  ID       VARCHAR2(50) not null,  ROLENAME VARCHAR2(500) not null);
 -- Create/Recreate primary, unique and foreign key constraints 
