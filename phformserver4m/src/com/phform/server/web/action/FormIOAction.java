@@ -398,8 +398,6 @@ public class FormIOAction extends BaseAction
                          */
                     }
                     
-                    synchronized (Constants.synObj)
-                    {
                         se = baseDao.getHibernateSession();
                         conn = se.connection();
                         for (int j = 0; j < valuesList.size(); j++)
@@ -407,45 +405,42 @@ public class FormIOAction extends BaseAction
                             FormInData data = (FormInData) valuesList.get(j);
                             FormInResult inResult = new FormInResult();
                             int lastVersion = -1;
-                            if (!"".equals(data.getInstanceId()))
-                            {
-                                ps =
-                                    conn
-                                            .prepareStatement("select t.version from PH_FORM_INSTANCE t where t.id=?");
-                                ps.setString(1, data.getInstanceId());
-                                rs = ps.executeQuery();
-                                if (rs.next())
-                                {
-                                    lastVersion = rs.getInt("version");
-                                }
-                                if (null != rs)
-                                {
-                                    try
-                                    {
-                                        rs.close();
-                                    }
-                                    catch (Exception e)
-                                    {
-                                    }
-                                    rs = null;
-                                }
-                                if (null != ps)
-                                {
-                                    try
-                                    {
-                                        ps.close();
-                                    }
-                                    catch (Exception e)
-                                    {
-                                    }
-                                    ps = null;
-                                }
-                            }
-                            lastVersion++;
-                            inResult.setVersion(lastVersion);
                             
                             if (!"".equals(data.getInstanceId()))
                             {
+                            	synchronized (Constants.synObj)
+                            	{
+								ps = conn
+										.prepareStatement("select t.version from PH_FORM_INSTANCE t where t.id=?");
+								ps.setString(1, data.getInstanceId());
+								rs = ps.executeQuery();
+								if (rs.next())
+								{
+									lastVersion = rs.getInt("version");
+								}
+								if (null != rs)
+								{
+									try
+									{
+										rs.close();
+									}
+									catch (Exception e)
+									{
+									}
+									rs = null;
+								}
+								if (null != ps)
+								{
+									try
+									{
+										ps.close();
+									}
+									catch (Exception e)
+									{
+									}
+									ps = null;
+								}
+	                            lastVersion++;
                                 ps =
                                     conn
                                             .prepareStatement("update PH_FORM_INSTANCE t set t.version=? where t.id=?");
@@ -463,10 +458,12 @@ public class FormIOAction extends BaseAction
                                     }
                                     ps = null;
                                 }
+                            	}
                             }
                             else if (!"".equals(data.getFormId())
                                     && !"".equals(data.getFormRecordId()))
                             {
+                                lastVersion++;
                                 data.setInstanceId(FormFileUtil.generateUUID());
                                 ps =
                                     conn
@@ -487,6 +484,7 @@ public class FormIOAction extends BaseAction
                                     ps = null;
                                 }
                             }
+                            inResult.setVersion(lastVersion);
                             if (!"".equals(data.getInstanceId()))
                             {
                                 boolean batchFlag = false;
@@ -705,7 +703,6 @@ public class FormIOAction extends BaseAction
                             inResult.setInstanceId(data.getInstanceId());
                             finalRet.add(inResult);
                         }
-                    }
                 }
             }
         }
