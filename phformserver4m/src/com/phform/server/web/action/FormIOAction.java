@@ -398,49 +398,50 @@ public class FormIOAction extends BaseAction
                          */
                     }
                     
-                        se = baseDao.getHibernateSession();
-                        conn = se.connection();
-                        for (int j = 0; j < valuesList.size(); j++)
+                    se = baseDao.getHibernateSession();
+                    conn = se.connection();
+                    for (int j = 0; j < valuesList.size(); j++)
+                    {
+                        FormInData data = (FormInData) valuesList.get(j);
+                        FormInResult inResult = new FormInResult();
+                        int lastVersion = -1;
+                        
+                        if (!"".equals(data.getInstanceId()))
                         {
-                            FormInData data = (FormInData) valuesList.get(j);
-                            FormInResult inResult = new FormInResult();
-                            int lastVersion = -1;
-                            
-                            if (!"".equals(data.getInstanceId()))
+                            synchronized (Constants.synObj)
                             {
-                            	synchronized (Constants.synObj)
-                            	{
-								ps = conn
-										.prepareStatement("select t.version from PH_FORM_INSTANCE t where t.id=?");
-								ps.setString(1, data.getInstanceId());
-								rs = ps.executeQuery();
-								if (rs.next())
-								{
-									lastVersion = rs.getInt("version");
-								}
-								if (null != rs)
-								{
-									try
-									{
-										rs.close();
-									}
-									catch (Exception e)
-									{
-									}
-									rs = null;
-								}
-								if (null != ps)
-								{
-									try
-									{
-										ps.close();
-									}
-									catch (Exception e)
-									{
-									}
-									ps = null;
-								}
-	                            lastVersion++;
+                                ps =
+                                    conn
+                                            .prepareStatement("select t.version from PH_FORM_INSTANCE t where t.id=?");
+                                ps.setString(1, data.getInstanceId());
+                                rs = ps.executeQuery();
+                                if (rs.next())
+                                {
+                                    lastVersion = rs.getInt("version");
+                                }
+                                if (null != rs)
+                                {
+                                    try
+                                    {
+                                        rs.close();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                    }
+                                    rs = null;
+                                }
+                                if (null != ps)
+                                {
+                                    try
+                                    {
+                                        ps.close();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                    }
+                                    ps = null;
+                                }
+                                lastVersion++;
                                 ps =
                                     conn
                                             .prepareStatement("update PH_FORM_INSTANCE t set t.version=? where t.id=?");
@@ -458,76 +459,54 @@ public class FormIOAction extends BaseAction
                                     }
                                     ps = null;
                                 }
-                            	}
                             }
-                            else if (!"".equals(data.getFormId())
-                                    && !"".equals(data.getFormRecordId()))
+                        }
+                        else if (!"".equals(data.getFormId())
+                                && !"".equals(data.getFormRecordId()))
+                        {
+                            lastVersion++;
+                            data.setInstanceId(FormFileUtil.generateUUID());
+                            ps =
+                                conn
+                                        .prepareStatement("insert into PH_FORM_INSTANCE(id,formid,version) values(?,?,?)");
+                            ps.setString(1, data.getInstanceId());
+                            ps.setString(2, data.getFormRecordId());
+                            ps.setInt(3, lastVersion);
+                            ps.executeUpdate();
+                            if (null != ps)
                             {
-                                lastVersion++;
-                                data.setInstanceId(FormFileUtil.generateUUID());
+                                try
+                                {
+                                    ps.close();
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                                ps = null;
+                            }
+                        }
+                        inResult.setVersion(lastVersion);
+                        if (!"".equals(data.getInstanceId()))
+                        {
+                            boolean batchFlag = false;
+                            if (!data.getBoxValue().isEmpty())
+                            {
                                 ps =
                                     conn
-                                            .prepareStatement("insert into PH_FORM_INSTANCE(id,formid,version) values(?,?,?)");
-                                ps.setString(1, data.getInstanceId());
-                                ps.setString(2, data.getFormRecordId());
-                                ps.setInt(3, lastVersion);
-                                ps.executeUpdate();
-                                if (null != ps)
+                                            .prepareStatement("insert into PH_FORM_CHECKBOX(id,instanceId,checkboxId,version,checkboxValue) values(?,?,?,?,?)");
+                                Iterator it =
+                                    data.getBoxValue().entrySet().iterator();
+                                while (it.hasNext())
                                 {
-                                    try
+                                    Entry entry = (Entry) it.next();
+                                    if (data.getPermissionMap().containsKey(
+                                            entry.getKey().toString()))
                                     {
-                                        ps.close();
-                                    }
-                                    catch (Exception e)
-                                    {
-                                    }
-                                    ps = null;
-                                }
-                            }
-                            inResult.setVersion(lastVersion);
-                            if (!"".equals(data.getInstanceId()))
-                            {
-                                boolean batchFlag = false;
-                                if (!data.getBoxValue().isEmpty())
-                                {
-                                    ps =
-                                        conn
-                                                .prepareStatement("insert into PH_FORM_CHECKBOX(id,instanceId,checkboxId,version,checkboxValue) values(?,?,?,?,?)");
-                                    Iterator it =
-                                        data.getBoxValue().entrySet()
-                                                .iterator();
-                                    while (it.hasNext())
-                                    {
-                                        Entry entry = (Entry) it.next();
-                                        if (data.getPermissionMap()
-                                                .containsKey(
-                                                        entry.getKey()
-                                                                .toString()))
-                                        {
-                                            String per =
-                                                data.getPermissionMap().get(
-                                                        entry.getKey()
-                                                                .toString())
-                                                        .toString();
-                                            if (!per
-                                                    .equals(Constants.ELEMENT_READ))
-                                            {
-                                                ps.setString(1, FormFileUtil
-                                                        .generateUUID());
-                                                ps.setString(2, data
-                                                        .getInstanceId());
-                                                ps.setString(3, entry.getKey()
-                                                        .toString());
-                                                ps.setInt(4, lastVersion);
-                                                ps
-                                                        .setString(
-                                                                5,
-                                                                Constants.CHECKBOX_TRUE);
-                                                ps.addBatch();
-                                                batchFlag = true;
-                                            }
-                                        }
-                                        else
+                                        String per =
+                                            data.getPermissionMap().get(
+                                                    entry.getKey().toString())
+                                                    .toString();
+                                        if (!per.equals(Constants.ELEMENT_READ))
                                         {
                                             ps.setString(1, FormFileUtil
                                                     .generateUUID());
@@ -542,167 +521,170 @@ public class FormIOAction extends BaseAction
                                             batchFlag = true;
                                         }
                                     }
-                                    if (batchFlag)
+                                    else
                                     {
-                                        ps.executeBatch();
-                                        batchFlag = false;
-                                    }
-                                    if (null != ps)
-                                    {
-                                        try
-                                        {
-                                            ps.close();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                        }
-                                        ps = null;
+                                        ps.setString(1, FormFileUtil
+                                                .generateUUID());
+                                        ps.setString(2, data.getInstanceId());
+                                        ps.setString(3, entry.getKey()
+                                                .toString());
+                                        ps.setInt(4, lastVersion);
+                                        ps
+                                                .setString(5,
+                                                        Constants.CHECKBOX_TRUE);
+                                        ps.addBatch();
+                                        batchFlag = true;
                                     }
                                 }
-                                if (!data.getTextValue().isEmpty())
+                                if (batchFlag)
                                 {
-                                    ps =
-                                        conn
-                                                .prepareStatement("insert into PH_FORM_TEXT(id,instanceId,textId,version,textValue) values(?,?,?,?,?)");
-                                    Iterator it =
-                                        data.getTextValue().entrySet()
-                                                .iterator();
-                                    while (it.hasNext())
-                                    {
-                                        Entry entry = (Entry) it.next();
-                                        if (data.getPermissionMap()
-                                                .containsKey(
-                                                        entry.getKey()
-                                                                .toString()))
-                                        {
-                                            String per =
-                                                data.getPermissionMap().get(
-                                                        entry.getKey()
-                                                                .toString())
-                                                        .toString();
-                                            if (!per
-                                                    .equals(Constants.ELEMENT_READ))
-                                            {
-                                                ps.setString(1, FormFileUtil
-                                                        .generateUUID());
-                                                ps.setString(2, data
-                                                        .getInstanceId());
-                                                ps.setString(3, entry.getKey()
-                                                        .toString());
-                                                ps.setInt(4, lastVersion);
-                                                ps.setString(5, entry
-                                                        .getValue().toString());
-                                                ps.addBatch();
-                                                batchFlag = true;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            ps.setString(1, FormFileUtil
-                                                    .generateUUID());
-                                            ps.setString(2, data
-                                                    .getInstanceId());
-                                            ps.setString(3, entry.getKey()
-                                                    .toString());
-                                            ps.setInt(4, lastVersion);
-                                            ps.setString(5, entry.getValue()
-                                                    .toString());
-                                            ps.addBatch();
-                                            batchFlag = true;
-                                        }
-                                    }
-                                    if (batchFlag)
-                                    {
-                                        ps.executeBatch();
-                                        batchFlag = false;
-                                    }
-                                    if (null != ps)
-                                    {
-                                        try
-                                        {
-                                            ps.close();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                        }
-                                        ps = null;
-                                    }
+                                    ps.executeBatch();
+                                    batchFlag = false;
                                 }
-                                if (!data.getAreaValue().isEmpty())
+                                if (null != ps)
                                 {
-                                    ps =
-                                        conn
-                                                .prepareStatement("insert into PH_FORM_TEXTAREA(id,instanceId,textareaId,version,textareaValue) values(?,?,?,?,?)");
-                                    Iterator it =
-                                        data.getAreaValue().entrySet()
-                                                .iterator();
-                                    while (it.hasNext())
+                                    try
                                     {
-                                        Entry entry = (Entry) it.next();
-                                        if (data.getPermissionMap()
-                                                .containsKey(
-                                                        entry.getKey()
-                                                                .toString()))
-                                        {
-                                            String per =
-                                                data.getPermissionMap().get(
-                                                        entry.getKey()
-                                                                .toString())
-                                                        .toString();
-                                            if (!per
-                                                    .equals(Constants.ELEMENT_READ))
-                                            {
-                                                ps.setString(1, FormFileUtil
-                                                        .generateUUID());
-                                                ps.setString(2, data
-                                                        .getInstanceId());
-                                                ps.setString(3, entry.getKey()
-                                                        .toString());
-                                                ps.setInt(4, lastVersion);
-                                                ps.setString(5, entry
-                                                        .getValue().toString());
-                                                ps.addBatch();
-                                                batchFlag = true;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            ps.setString(1, FormFileUtil
-                                                    .generateUUID());
-                                            ps.setString(2, data
-                                                    .getInstanceId());
-                                            ps.setString(3, entry.getKey()
-                                                    .toString());
-                                            ps.setInt(4, lastVersion);
-                                            ps.setString(5, entry.getValue()
-                                                    .toString());
-                                            ps.addBatch();
-                                            batchFlag = true;
-                                        }
+                                        ps.close();
                                     }
-                                    if (batchFlag)
+                                    catch (Exception e)
                                     {
-                                        ps.executeBatch();
-                                        batchFlag = false;
                                     }
-                                    if (null != ps)
-                                    {
-                                        try
-                                        {
-                                            ps.close();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                        }
-                                        ps = null;
-                                    }
+                                    ps = null;
                                 }
                             }
-                            inResult.setFormId(data.getFormId());
-                            inResult.setFormRecordId(data.getFormRecordId());
-                            inResult.setInstanceId(data.getInstanceId());
-                            finalRet.add(inResult);
+                            if (!data.getTextValue().isEmpty())
+                            {
+                                ps =
+                                    conn
+                                            .prepareStatement("insert into PH_FORM_TEXT(id,instanceId,textId,version,textValue) values(?,?,?,?,?)");
+                                Iterator it =
+                                    data.getTextValue().entrySet().iterator();
+                                while (it.hasNext())
+                                {
+                                    Entry entry = (Entry) it.next();
+                                    if (data.getPermissionMap().containsKey(
+                                            entry.getKey().toString()))
+                                    {
+                                        String per =
+                                            data.getPermissionMap().get(
+                                                    entry.getKey().toString())
+                                                    .toString();
+                                        if (!per.equals(Constants.ELEMENT_READ))
+                                        {
+                                            ps.setString(1, FormFileUtil
+                                                    .generateUUID());
+                                            ps.setString(2, data
+                                                    .getInstanceId());
+                                            ps.setString(3, entry.getKey()
+                                                    .toString());
+                                            ps.setInt(4, lastVersion);
+                                            ps.setString(5, entry.getValue()
+                                                    .toString());
+                                            ps.addBatch();
+                                            batchFlag = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ps.setString(1, FormFileUtil
+                                                .generateUUID());
+                                        ps.setString(2, data.getInstanceId());
+                                        ps.setString(3, entry.getKey()
+                                                .toString());
+                                        ps.setInt(4, lastVersion);
+                                        ps.setString(5, entry.getValue()
+                                                .toString());
+                                        ps.addBatch();
+                                        batchFlag = true;
+                                    }
+                                }
+                                if (batchFlag)
+                                {
+                                    ps.executeBatch();
+                                    batchFlag = false;
+                                }
+                                if (null != ps)
+                                {
+                                    try
+                                    {
+                                        ps.close();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                    }
+                                    ps = null;
+                                }
+                            }
+                            if (!data.getAreaValue().isEmpty())
+                            {
+                                ps =
+                                    conn
+                                            .prepareStatement("insert into PH_FORM_TEXTAREA(id,instanceId,textareaId,version,textareaValue) values(?,?,?,?,?)");
+                                Iterator it =
+                                    data.getAreaValue().entrySet().iterator();
+                                while (it.hasNext())
+                                {
+                                    Entry entry = (Entry) it.next();
+                                    if (data.getPermissionMap().containsKey(
+                                            entry.getKey().toString()))
+                                    {
+                                        String per =
+                                            data.getPermissionMap().get(
+                                                    entry.getKey().toString())
+                                                    .toString();
+                                        if (!per.equals(Constants.ELEMENT_READ))
+                                        {
+                                            ps.setString(1, FormFileUtil
+                                                    .generateUUID());
+                                            ps.setString(2, data
+                                                    .getInstanceId());
+                                            ps.setString(3, entry.getKey()
+                                                    .toString());
+                                            ps.setInt(4, lastVersion);
+                                            ps.setString(5, entry.getValue()
+                                                    .toString());
+                                            ps.addBatch();
+                                            batchFlag = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ps.setString(1, FormFileUtil
+                                                .generateUUID());
+                                        ps.setString(2, data.getInstanceId());
+                                        ps.setString(3, entry.getKey()
+                                                .toString());
+                                        ps.setInt(4, lastVersion);
+                                        ps.setString(5, entry.getValue()
+                                                .toString());
+                                        ps.addBatch();
+                                        batchFlag = true;
+                                    }
+                                }
+                                if (batchFlag)
+                                {
+                                    ps.executeBatch();
+                                    batchFlag = false;
+                                }
+                                if (null != ps)
+                                {
+                                    try
+                                    {
+                                        ps.close();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                    }
+                                    ps = null;
+                                }
+                            }
                         }
+                        inResult.setFormId(data.getFormId());
+                        inResult.setFormRecordId(data.getFormRecordId());
+                        inResult.setInstanceId(data.getInstanceId());
+                        finalRet.add(inResult);
+                    }
                 }
             }
         }
@@ -1561,12 +1543,12 @@ public class FormIOAction extends BaseAction
         }
         return iframeValues;
     }
-
+    
     public String getNavigatorUserAgent()
     {
         return navigatorUserAgent == null ? "" : navigatorUserAgent.trim();
     }
-
+    
     public void setNavigatorUserAgent(String navigatorUserAgent)
     {
         this.navigatorUserAgent = navigatorUserAgent;
